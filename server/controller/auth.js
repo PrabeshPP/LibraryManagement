@@ -58,7 +58,7 @@ const authenticateUser = async (req, res, next) => {
 
     if (foundUser) {
         const hashedPassword = foundUser.password;
-        const result = await comparePassword(password, hashPassword);
+        const result = await comparePassword(password, hashedPassword);
         if (result) {
             const payload = { "email": foundUser.email}
             const resultedRefreshToken = await Prisma.refreshToken.findFirst({

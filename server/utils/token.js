@@ -4,8 +4,8 @@ const Prisma=require("./prisma");
 const createAccessToken=(payload)=>{
     const token=jwt.sign({
         email:payload.email
-    },process.env.ACCESS_TOKEN_SECRET,
-    {expiresIn:'30m'}
+    },process.env.ACCESS_TOKEN,
+    {expiresIn:'40m'}
     )
 
     return token;
@@ -14,7 +14,7 @@ const createAccessToken=(payload)=>{
 const createRefreshToken=(payload)=>{
     const token=jwt.sign({
         email:payload.email,  
-    },process.env.REFRESH_TOKEN_SECRET,
+    },process.env.REFRESH_TOKEN,
     {expiresIn:'30d'}
     )
      
@@ -22,16 +22,21 @@ const createRefreshToken=(payload)=>{
 }
 
 
-const generateAccessTokenFromRefreshToken=(payload)=>{
-    
-}
-
 
 const verifyToken=(payload)=>{
     const token=payload.token;
     try{
-        var decoded=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+        var decoded=jwt.verify(token,process.env.ACCESS_TOKEN);
         return decoded;
+    }catch(err){
+        return null;
+    }
+}
+
+const verifyRefreshToken=(payload)=>{
+    const token=payload.token;
+    try{
+        var decoded=jwt.verify(token,process.env.REFRESH_TOKEN)
     }catch(err){
         return null;
     }
@@ -39,4 +44,4 @@ const verifyToken=(payload)=>{
 
 
 
-module.exports={createAccessToken,createRefreshToken,verifyToken}
+module.exports={createAccessToken,createRefreshToken,verifyToken,verifyRefreshToken}
