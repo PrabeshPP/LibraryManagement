@@ -7,7 +7,7 @@ const NavBar=()=>{
     const navigate=useNavigate();
     const token=Cookies.get("_j1");
     const logOut=()=>{
-        Cookies.remove("jwt");
+        Cookies.remove("_j1");
         navigate("/");
     }
     useEffect(()=>{

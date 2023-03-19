@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 
 const SecretPage=()=>{
-    const token=Cookies.get("jwt");
+    const token=Cookies.get("_j1");
     setAuthToken(token);
     const navigate=useNavigate();
     const [message,setMessage]=useState();

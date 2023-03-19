@@ -8,7 +8,7 @@ import SecretPage from "./components/page/secretPage";
 import { setAuthToken } from "./useAuthToken";
 
 function App() {
-  const token=Cookies.get("jwt");
+  const token=Cookies.get("_j1");
   if(token){
     setAuthToken(token);
   }
