@@ -5,7 +5,7 @@ const createAccessToken=(payload)=>{
     const token=jwt.sign({
         email:payload.email
     },process.env.ACCESS_TOKEN,
-    {expiresIn:'30s'}
+    {expiresIn:'15m'}
     )
 
     return token;

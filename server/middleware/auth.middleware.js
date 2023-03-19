@@ -42,7 +42,7 @@ const authMiddleware = async (req, res, next) => {
                 });
 
                 const accessToken = createAccessToken(payload);
-                res.cookie("%j1", accessToken, {
+                res.cookie("_j1", accessToken, {
                     withCredentials: true,
                     secure: false,
                     domain: "localhost"

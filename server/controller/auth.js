@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
         }
     });
 
-    res.cookie("%j1", accessToken, {
+    res.cookie("_j1", accessToken, {
         withCredentials: true,
         secure: false,
         domain: "localhost"
@@ -83,7 +83,7 @@ const authenticateUser = async (req, res, next) => {
             }
 
             const accessToken = createAccessToken(payload);
-            res.cookie("%j1", accessToken, {
+            res.cookie("_j1", accessToken, {
                 withCredentials: true,
                 secure: false,
                 domain: "localhost"
