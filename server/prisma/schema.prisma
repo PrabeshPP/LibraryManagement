@@ -16,6 +16,7 @@ model User{
   lastName String
   email String @unique
   password String
+  refreshToken RefreshToken?
 }
 
 //Author Table
@@ -37,4 +38,15 @@ model Book{
   coverImage String
   authorId String
   author Author @relation(fields: [authorId],references: [id])
+}
+
+//Refresh Token Table
+
+model RefreshToken{
+  id String @id @default(uuid())
+  userId String @unique
+  token String @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user User @relation(fields: [userId],references: [id])
 }

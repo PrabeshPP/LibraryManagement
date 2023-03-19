@@ -1,32 +1,42 @@
-const jwt=require("jsonwebtoken")
+const jwt=require("jsonwebtoken");
+const Prisma=require("./prisma");
 
-const accessToken=(payload)=>{
+const createAccessToken=(payload)=>{
     const token=jwt.sign({
         email:payload.email
     },process.env.ACCESS_TOKEN_SECRET,
-    {expiresIn:'30s'}
+    {expiresIn:'30m'}
     )
 
     return token;
 }
 
-const refreshToken=(payload)=>{
+const createRefreshToken=(payload)=>{
     const token=jwt.sign({
         email:payload.email,  
     },process.env.REFRESH_TOKEN_SECRET,
-    {expiresIn:'1d'})
+    {expiresIn:'30d'}
+    )
      
     return token;
 }
 
+
+const generateAccessTokenFromRefreshToken=(payload)=>{
+    
+}
+
+
 const verifyToken=(payload)=>{
     const token=payload.token;
     try{
-        var decoded=jwt.verify(token,process.env.REFRESH_TOKEN_SECRET);
+        var decoded=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
         return decoded;
     }catch(err){
         return null;
     }
 }
 
-module.exports={accessToken,refreshToken,verifyToken}
+
+
+module.exports={createAccessToken,createRefreshToken,verifyToken}

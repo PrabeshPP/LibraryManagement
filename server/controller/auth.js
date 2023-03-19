@@ -1,0 +1,81 @@
+const Prisma=require("../utils/prisma");
+const {hashPassword,comparePassword}=require("../utils/hash");
+const {createAccessToken,createRefreshToken,verifyToken}=require("../utils/token");
+
+
+const createUser=async(req,res,next)=>{
+
+    const firstName=req.body.firstName;
+    const lastName=req.body.lastName;
+    const email=req.body.email;
+    const plainPassword=req.body.password;
+    const hashedPassword=await hashPassword(plainPassword);
+
+    const user=await Prisma.user.create({
+        data:{
+            firstName:firstName,
+            lastName:lastName,
+            email:email,
+            password:hashedPassword
+        }
+    })
+    const payload={"email":user.email}
+    const accessToken=createAccessToken(payload);
+    const refreshToken=createRefreshToken(payload);
+
+    const storeRefreshToken=await Prisma.refreshToken.create({
+        data:{
+            token:refreshToken,
+            expiresAt:new Date(Date.now()+30 * 24 * 60 * 60 * 1000),
+            user:{
+                connect:{id:user.id}
+            }
+        }
+    });
+
+    res.cookie("jwt", accessToken, {
+        withCredentials:true,
+        secure:false,
+        domain:"localhost"
+    });
+
+    res.status(200);
+    res.json({"message":"Successfully Created an Account"});
+
+    
+    
+}
+
+const authenticateUser=async(req,res,next)=>{
+            const email=req.body.email;
+            const password=req.body.password;
+            const foundUser=await Prisma.user.findFirst({
+                where:{
+                    email:email
+                },
+                include:{
+                    refreshToken:{
+                        where:{
+                            expiresAt:{
+                                gt:new Date()
+                            }
+                        }
+                    }
+                }
+            });
+            
+
+            if(foundUser){
+                const hashedPassword=foundUser.password;
+                const result=await comparePassword(password,hashPassword);
+                if(result){
+
+                }
+                
+            }
+
+            
+}
+
+
+module.exports={createUser,authenticateUser}
