@@ -3,7 +3,7 @@ const { hashPassword, comparePassword } = require("../utils/hash");
 const { createAccessToken, createRefreshToken, verifyToken } = require("../utils/token");
 
 
-const createUser = async (req, res, next) => {
+const createUser = async (req, res) => {
 
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;

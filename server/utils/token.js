@@ -1,11 +1,11 @@
 const jwt=require("jsonwebtoken");
-const Prisma=require("./prisma");
+
 
 const createAccessToken=(payload)=>{
     const token=jwt.sign({
         email:payload.email
     },process.env.ACCESS_TOKEN,
-    {expiresIn:'40m'}
+    {expiresIn:'30s'}
     )
 
     return token;
@@ -37,6 +37,7 @@ const verifyRefreshToken=(payload)=>{
     const token=payload.token;
     try{
         var decoded=jwt.verify(token,process.env.REFRESH_TOKEN)
+        return decoded;
     }catch(err){
         return null;
     }

@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
 
     if (result != null) {
         const currentTime = Date.now()
-        const expirationTime = res.exp * 1000;
+        const expirationTime = result.exp * 1000;
         if (expirationTime - currentTime <= 60 * 1000 * 2) {
             const user = await Prisma.user.findFirst({
                 where: {
