@@ -5,6 +5,7 @@ import Login from "./components/page/login";
 import NormalPage from "./components/page/normalPage";
 import PrivateRoutes from "./components/page/protectedRoutes";
 import SecretPage from "./components/page/secretPage";
+import Signup from "./components/page/signup";
 import { setAuthToken } from "./useAuthToken";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
             <Route path="/secret" element={<SecretPage/>}/>
           </Route>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element= {<Signup/>} />
        </Routes>
     </div>
   );
