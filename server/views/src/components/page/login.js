@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../useAuthToken";
+import Cookies from "js-cookie";
 
 const Login = () => {
     const navigate=useNavigate();
@@ -14,9 +16,22 @@ const Login = () => {
         }
 
         // This is where I will send request to the backend to authenticate
+       try{
         const response=await axios.post("/login",data,{
             withCredentials:true
         })
+        const token=Cookies.get("_j1")
+        if(token){
+            setAuthToken(token)
+        }else{
+            setAuthToken()
+        }
+        
+       }catch(err){
+        alert("There was error in authenticating!")
+       }
+
+
 
 
         navigate("/")

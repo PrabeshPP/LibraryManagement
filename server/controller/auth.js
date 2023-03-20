@@ -60,15 +60,40 @@ const authenticateUser = async (req, res, next) => {
         const hashedPassword = foundUser.password;
         const result = await comparePassword(password, hashedPassword);
         if (result) {
-            const payload = { "email": foundUser.email}
+            const payload = { "email": foundUser.email }
             const resultedRefreshToken = await Prisma.refreshToken.findFirst({
                 where: {
                     userId: foundUser.id
                 }
             });
-            const expiresAt = new Date(resultedRefreshToken.expiresAt)
-            if (expiresAt < new Date()) {
+            if (resultedRefreshToken != null) {
+                const expiresAt = new Date(resultedRefreshToken.expiresAt)
+                if (expiresAt < new Date()) {
 
+                    const refreshToken = createRefreshToken(payload);
+                    const storeRefreshToken = await Prisma.refreshToken.create({
+                        data: {
+                            token: refreshToken,
+                            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
+                            user: {
+                                connect: { id: foundUser.id }
+                            }
+                        }
+                    });
+
+                }
+
+                const accessToken = createAccessToken(payload);
+                res.cookie("_j1", accessToken, {
+                    withCredentials: true,
+                    secure: false,
+                    domain: "localhost"
+                });
+
+                res.status(200);
+                res.json({ "message": "Successfully Logged In!" });
+                
+            } else {
                 const refreshToken = createRefreshToken(payload);
                 const storeRefreshToken = await Prisma.refreshToken.create({
                     data: {
@@ -80,20 +105,47 @@ const authenticateUser = async (req, res, next) => {
                     }
                 });
 
+                const accessToken = createAccessToken(payload);
+                res.cookie("_j1", accessToken, {
+                    withCredentials: true,
+                    secure: false,
+                    domain: "localhost"
+                });
+
+                res.status(200);
+                res.json({ "message": "Successfully Logged In!" });
+
             }
 
-            const accessToken = createAccessToken(payload);
-            res.cookie("_j1", accessToken, {
-                withCredentials: true,
-                secure: false,
-                domain: "localhost"
-            });
-            
-            res.status(200);
-            res.json({ "message": "Successfully Logged In!" });
         }
+    }else{
+        res.status(401);
+        res.json({"message":"Not Authorized!"})
+    }
+}
+
+const logoutUser = async (req, res) => {
+    const header = req.headers.authorization;
+    const token = header.split(" ")[1]
+    const result = verifyToken({ "token": token })
+    const user = await Prisma.user.findFirst({
+        where: {
+            email: result.email
+        }
+    });
+    if (user) {
+        const deletedToken = await Prisma.refreshToken.delete({
+            where: {
+                userId: user.id
+            }
+        });
+        res.status(200);
+        res.json({ "message": "Successfully Logged Out!" })
+    } else {
+        res.status(401);
+        res.json({ "message": "User not Found!" })
     }
 }
 
 
-module.exports = { createUser, authenticateUser }
+module.exports = { createUser, authenticateUser, logoutUser }

@@ -1,14 +1,25 @@
 import { NavLink,useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
+import axios from 'axios'
 
 
 const NavBar=()=>{
     const navigate=useNavigate();
     const token=Cookies.get("_j1");
-    const logOut=()=>{
+    const logOut=async()=>{
+        console.log("Hello world")
+       try{
+        const response=await axios.post("/logout",{},{
+            withCredentials:true
+        });
         Cookies.remove("_j1");
         navigate("/");
+       }catch(err){
+        alert("You have altered the token");
+        Cookies.remove("_j1");
+        navigate("/");
+       }
     }
     useEffect(()=>{
 
