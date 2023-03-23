@@ -1,6 +1,7 @@
 import Cookies from "js-cookie";
 import { Route, Routes } from "react-router";
 import NavBar from "./components/navBar";
+import BookAdd from "./components/page/bookadd";
 import Login from "./components/page/login";
 import NormalPage from "./components/page/normalPage";
 import PrivateRoutes from "./components/page/protectedRoutes";
@@ -23,6 +24,7 @@ function App() {
           </Route>
           <Route path="/login" element={<Login/>}/>
           <Route path="/signup" element= {<Signup/>} />
+          <Route path = "/bookadd" element = {<BookAdd/>} />
        </Routes>
     </div>
   );
