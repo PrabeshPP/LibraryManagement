@@ -5,11 +5,17 @@ const createBook=async(req,res)=>{
     const bookName=req.body.bookName;
     const isbn=req.body.isbn;
     const summary=req.body.summary
-    const coverImage=req.body.coverImage;
+    const coverImage=req.cloudinaryUrl;
     const authorFirstName=req.body.authorFirstName;
     const authorLastName=req.body.authorLastName;
 
-   
+    // console.log(bookName)
+    // console.log(isbn)
+    // console.log(summary)
+    // console.log(coverImage)
+    // console.log(authorFirstName)
+    // console.log(authorLastName)
+
 
     //find author with that Name
     const atuhorExist=await Prisma.author.findFirst({
@@ -19,6 +25,7 @@ const createBook=async(req,res)=>{
         }
     })
     if(atuhorExist){
+        
         const createdBook=await Prisma.book.create({
             data:{
                 bookName:bookName,

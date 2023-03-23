@@ -5,6 +5,7 @@ const authenticationUserRoute=require("./routes/authentication");
 const authMiddleware=require("./middleware/auth.middleware");
 const bookRouter=require("./routes/Books/books");
 
+
 dotenv.config();
 const port=process.env.PORT;
 
@@ -16,7 +17,9 @@ app.use(express.urlencoded({extended:false}));
 
 app.use(authenticationUserRoute);
 app.use(bookRouter);
+
 app.use("/res",authMiddleware,(req,res)=>{
+    
     res.status(200);
     res.json({"message":"Looks Like you Fucked up Something!"})
 })
