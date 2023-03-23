@@ -7,11 +7,7 @@ const {checkAdmin}=require("../../middleware/checkAdmin.middleware");
 
 //This is a starting for CRUD operation
 
-router.route("/create-book").post(authMiddleware,checkAdmin,(req,res)=>{
-    res.status(200)
-    res.json({"message":"Successfully Create A Book!"})
-});
-    // upload.single('image'),uploadImage,createBook);
+router.route("/create-book").post(authMiddleware,checkAdmin,upload.single('image'),uploadImage,createBook);
 router.route("/books").get(getAllBooks)
 
 

@@ -16,6 +16,7 @@ const checkAdmin=async(req,res,next)=>{
         if(user){
             const role=user.role;
             if(role==="admin"){
+                req.admin=user.id
                 next()
             }else{
                 res.status(401);
