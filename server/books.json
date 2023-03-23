@@ -1,0 +1,16 @@
+[
+    {
+        "title": "One Hundred Years of Solitude",
+        "authorFirstName": "Gabriel",
+        "authorLastName": "Garcia Marquez",
+        "isbn": "9780060883287",
+        "description": "A novel that tells the multi-generational story of the Buendía family, set against the backdrop of the fictional town of Macondo. The book explores themes of magic realism, family, and the cyclical nature of time and history."
+      },
+      {
+        "title": "Beloved",
+        "authorFirstName": "Toni",
+        "authorLastName": "Morrison",
+        "isbn": "9781400033416",
+        "description": "A novel set in the years following the American Civil War, it tells the story of Sethe, a former slave, and her daughter Denver as they navigate their lives after escaping slavery. The book explores themes of slavery, motherhood, and the effects of trauma."
+      }
+]
