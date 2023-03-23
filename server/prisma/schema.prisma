@@ -17,6 +17,7 @@ model User{
   email String @unique
   password String
   refreshToken RefreshToken?
+  role String @default("user")
 }
 
 //Author Table
@@ -50,3 +51,5 @@ model RefreshToken{
   createdAt DateTime @default(now())
   user User @relation(fields: [userId],references: [id])
 }
+
+

@@ -4,6 +4,7 @@ const dotenv=require("dotenv");
 const authenticationUserRoute=require("./routes/authentication");
 const authMiddleware=require("./middleware/auth.middleware");
 const bookRouter=require("./routes/Books/books");
+const adminRouter=require("./routes/admin/adminAuthentication");
 
 
 dotenv.config();
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended:false}));
 
 app.use(authenticationUserRoute);
 app.use(bookRouter);
+app.use("/admin",adminRouter)
 
 app.use("/res",authMiddleware,(req,res)=>{
     
