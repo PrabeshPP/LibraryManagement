@@ -59,7 +59,13 @@ const createBook=async(req,res)=>{
                     connect:{
                         id:createdAuthor.id
                     }
+                },
+                user:{
+                    connect:{
+                        id:req.admin
+                    }
                 }
+                
             },
         })
 
