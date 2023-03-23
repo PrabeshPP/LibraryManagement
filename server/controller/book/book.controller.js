@@ -68,5 +68,12 @@ const createBook=async(req,res)=>{
     }
 }
 
+//Get all the books
+const getAllBooks=async(req,res)=>{
+    const list_of_books=await Prisma.book.findMany()
+    res.status(200)
+    res.json({"books":list_of_books})
+}
 
-module.exports={createBook}
+
+module.exports={createBook,getAllBooks}
