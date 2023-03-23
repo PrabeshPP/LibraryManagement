@@ -34,6 +34,7 @@ const NavBar=()=>{
                     token?<div onClick={logOut} className="h-[90%] w-[20%] flex justify-center items-center hover:text-white rounded-md text-lg font-bold hover:cursor-pointer hover:bg-purple-500 ">Logout</div>
                     :<NavLink to={"/login"} className="h-[90%] w-[20%] flex justify-center items-center hover:text-white rounded-md text-lg font-bold hover:cursor-pointer hover:bg-purple-500 ">Login</NavLink>
                 }
+                <NavLink to={"/bookadd"} className="h-[90%] w-[20%] flex justify-center items-center hover:text-white rounded-md text-lg font-bold hover:cursor-pointer hover:bg-purple-500">Add Book</NavLink>
             </div>
     </div>
 }
