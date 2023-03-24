@@ -81,5 +81,41 @@ const getAllBooks=async(req,res)=>{
     res.json({"books":list_of_books})
 }
 
+//Get all the books based on the author
+const getAllAuthorBooks=async(req,res)=>{
+    const authorId=req.body.id;
+    const list_of_books=await Prisma.book.findMany({
+        where:{
+            authorId:authorId
+        }
+    })
+}
+
+//get a specific Book
+
+const getSingleBook=async(req,res)=>{
+    const bookId=req.body.id;
+    const book=await Prisma.book.findUnique({
+        where:{
+            id:bookId
+        }
+    })
+    res.status(200);
+    res.json({"data":book});
+}
+
+
+//delete a specific book
+
+const deleteBook=async(req,res)=>{
+    const bookId=req.body.id;
+    const result=await Prisma.book.delete({
+        where:{
+            id:bookId
+        }
+    })
+    res.status(200);
+    res.json({"message":"Successfully removed the book from our database!"})
+}
 
 module.exports={createBook,getAllBooks}
