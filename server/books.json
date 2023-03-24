@@ -1,0 +1,78 @@
+{
+  "books": [
+    {
+      "name": "To Kill a Mockingbird",
+      "isbn": "9780061120084",
+      "authorFirstName": "Harper",
+      "authorLastName": "Lee",
+      "description": "A Pulitzer Prize-winning novel set in the Depression-era South, about a lawyer who defends a black man against a false rape charge."
+    },
+    {
+      "name": "The Great Gatsby",
+      "isbn": "9780743273565",
+      "authorFirstName": "F. Scott",
+      "authorLastName": "Fitzgerald",
+      "description": "A classic American novel about the wealthy Jay Gatsby and his love for the married Daisy Buchanan."
+    },
+    {
+      "name": "1984",
+      "isbn": "9780451524935",
+      "authorFirstName": "George",
+      "authorLastName": "Orwell",
+      "description": "A dystopian novel set in a future totalitarian society, where government surveillance and control are omnipresent."
+    },
+    {
+      "name": "Pride and Prejudice",
+      "isbn": "9780141439518",
+      "authorFirstName": "Jane",
+      "authorLastName": "Austen",
+      "description": "A romantic novel set in Georgian England, about the Bennet family and their five daughters."
+    },
+    {
+      "name": "The Catcher in the Rye",
+      "isbn": "9780316769174",
+      "authorFirstName": "J.D.",
+      "authorLastName": "Salinger",
+      "description": "A coming-of-age novel about the rebellious teenager Holden Caulfield, who is expelled from his prep school."
+    },
+    {
+      "name": "The Hobbit",
+      "isbn": "9780547928227",
+      "authorFirstName": "J.R.R.",
+      "authorLastName": "Tolkien",
+      "description": "A fantasy novel about a hobbit named Bilbo Baggins, who embarks on a journey with a group of dwarves to reclaim their treasure from a dragon."
+    },
+    {
+      "name": "One Hundred Years of Solitude",
+      "isbn": "9780060883287",
+      "authorFirstName": "Gabriel",
+      "authorLastName": "García Márquez",
+      "description": "A magical realist novel about the Buendía family, set in the fictional town of Macondo in Colombia."
+    },
+    {
+      "name": "Brave New World",
+      "isbn": "9780060850524",
+      "authorFirstName": "Aldous",
+      "authorLastName": "Huxley",
+      "description": "A dystopian novel set in a future world where people are genetically engineered and conditioned to conform to a rigid social hierarchy."
+    },
+    {
+      "name": "The Diary of a Young Girl",
+      "isbn": "9780553577129",
+      "authorFirstName": "Anne",
+      "authorLastName": "Frank",
+      "description": "A memoir about the experiences of a young Jewish girl and her family, who were in hiding during the Nazi occupation of the Netherlands."
+    },
+    {
+      "name": "The Lord of the Rings",
+      "isbn": "9780544003415",
+      "authorFirstName": "J.R.R.",
+      "authorLastName": "Tolkien",
+      "description": "A high fantasy novel about hobbits, elves, dwarves, and other creatures, and their quest."
+    }
+
+  ]
+}
+
+
+
