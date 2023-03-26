@@ -11,7 +11,4 @@ router.route("/create-book").post(authMiddleware,checkAdmin,upload.single('image
 router.route("/books").get(getAllBooks)
 
 
-
-
-
 module.exports=router;
