@@ -20,5 +20,24 @@ const deleteUser=async(req,res)=>{
 //update the user
 
 const updateUser=async(req,res)=>{
-    
+    const userId=req.body.id;
+    const firstName=req.body.firstName
+    const lastName=req.body.lastName
+    const email=req.body.email
+    const password=req.body.password
+    const updatedUser=await Prisma.user.update({
+        where:{
+            id:userId
+        },
+        data:{
+            firstName:firstName,
+            lastName:lastName,
+            email:email,
+            password:password,
+        }
+    })
+
+    res.status(200)
+    res.json({"message":"Successfully Update the User!"})
+
 }
