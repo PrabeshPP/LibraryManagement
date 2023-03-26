@@ -22,13 +22,13 @@ const NavBar = () => {
                 <IoBookSharp/>
                 <p className=' ml-1'>Books</p>
                 </div>
-            <div className='text-[#64ffda] flex justify-center items-center text-lg font-semibold rounded-lg cursor-pointer h-[65%] w-[20%] border-[#64ffda] border-[1px] hover:bg-[#337d6c7a]'>
+            <div className='text-[#64ffda] flex justify-center items-center text-lg font-semibold rounded-lg cursor-pointer h-[65%] w-[20%] border-[#64ffda] border-[1px] hover:    bg-[#337d6c7a]'>
                 <BsCartFill/>
                 <p className=' ml-1'>Cart</p>
                 </div>
             <div className='text-[#64ffda] flex justify-center items-center text-lg font-semibold rounded-lg cursor-pointer h-[65%] w-[20%] border-[#64ffda] border-[1px] hover:bg-[#337d6c7a]'>
                 <BiLogIn/>
-                <p className=' ml-1'>SigIn</p>
+                <p className=' ml-1'>Sign In</p>
                 </div>
         </div>
     </div>
