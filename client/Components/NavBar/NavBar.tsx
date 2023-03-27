@@ -8,7 +8,7 @@ import {BiLogIn} from "react-icons/bi";
 
 const NavBar = () => {
   return (
-    <div className='bg-[#3b78ce] font-mono h-[10vh] w-[100%] flex flex-row justify-between'>
+    <div className='bg-[#3b78ce] font-mono h-[10vh] w-[100%] flex flex-row justify-between sticky top-0 z-50'>
         <div className='h-[100%] w-[15%] flex flex-row  items-center cursor-pointer'>
             <div className=' h-[80%] w-[30%] relative curs'>
             {/* <Image src={bookIcon}  alt="Library Icon" fill/> */}
@@ -24,7 +24,7 @@ const NavBar = () => {
                 </div>
             <div className='text-white'>
                 {/* <BsCartFill/> */}
-                <p className='ml-1'>Cart</p>
+                <p className='ml-1'>Issued Books</p>
                 </div>
             <div className='text-[#3b78ce] flex justify-center items-center text-lg font-semibold bg-[#fcfcfc] rounded-full cursor-pointer h-[65%] w-[20%] hover:bg-[#ebf1f9] hover:text-white'>
                 {/* <BiLogIn/> */}
