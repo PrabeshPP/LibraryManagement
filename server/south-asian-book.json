@@ -1,0 +1,74 @@
+{
+    "Books":[
+        {
+            "title": "Midnight's Children",
+            "author": {
+              "first_name": "Salman",
+              "last_name": "Rushdie"
+            },
+            "description": "A postcolonial novel that tells the story of Saleem Sinai, who was born at the exact moment that India gained independence from British colonial rule.",
+            "country": "India",
+            "isbn": "978-0099578512"
+          },
+          {
+            "title": "The God of Small Things",
+            "author": {
+              "first_name": "Arundhati",
+              "last_name": "Roy"
+            },
+            "description": "A novel set in Kerala, India that tells the story of the twins Estha and Rahel and their family, exploring themes of love, loss, and social boundaries.",
+            "country": "India",
+            "isbn": "978-0812979657"
+          },
+          {
+            "title": "A Fine Balance",
+            "author": {
+              "first_name": "Rohinton",
+              "last_name": "Mistry"
+            },
+            "description": "A novel set in India in the mid-1970s, which tells the story of four characters from different backgrounds whose lives intersect during a period of political turmoil.",
+            "country": "India",
+            "isbn": "978-1400030651"
+          },
+          {
+            "title": "The White Tiger",
+            "author": {
+              "first_name": "Aravind",
+              "last_name": "Adiga"
+            },
+            "description": "A novel set in modern-day India, which tells the story of Balram Halwai, a poor villager who becomes a successful entrepreneur by any means necessary.",
+            "country": "India",
+            "isbn": "978-1416562597"
+          },
+          {
+            "title": "The Palace of Illusions",
+            "author": {
+              "first_name": "Chitra",
+              "last_name": "Banerjee Divakaruni"
+            },
+            "description": "A retelling of the Indian epic Mahabharata from the perspective of the female character Draupadi.",
+            "country": "India",
+            "isbn": "978-1400096207"
+          },
+          {
+            "title": "The Namesake",
+            "author": {
+              "first_name": "Jhumpa",
+              "last_name": "Lahiri"
+            },
+            "description": "A novel that follows the journey of the Ganguli family, who move from Kolkata to New York City and face challenges in adjusting to a new culture while preserving their Indian heritage.",
+            "country": "India",
+            "isbn": "978-0618485222"
+          },
+          {
+            "title": "The Interpreter of Maladies",
+            "author": {
+              "first_name": "Jhumpa",
+              "last_name": "Lahiri"
+            },
+            "description": "A collection of short stories that explore the experiences of Indian immigrants and their children in the United States.",
+            "country": "India",
+            "isbn": "978-0395927205"
+          }
+    ]
+}

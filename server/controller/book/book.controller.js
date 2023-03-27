@@ -36,6 +36,11 @@ const createBook=async(req,res)=>{
                     connect:{
                         id:atuhorExist.id
                     }
+                },
+                user:{
+                    connect:{
+                        id:req.admin
+                    }
                 }
             },
         })
@@ -117,5 +122,9 @@ const deleteBook=async(req,res)=>{
     res.status(200);
     res.json({"message":"Successfully removed the book from our database!"})
 }
+
+
+//update the book
+/* To-do Task */
 
 module.exports={createBook,getAllBooks}

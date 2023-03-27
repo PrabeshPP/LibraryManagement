@@ -1,4 +1,28 @@
 const Prisma=require("../../utils/prisma");
+
+const getAllUser=async(req,res)=>{
+    const users=await Prisma.user.findMany();
+    res.status(200)
+    res.json({"users":users,"message":"Sucessfully Fetched all the users!"})
+}
+
+const getSingleUser=async(req,res)=>{
+    const userId=req.body.id;
+    const requestedUser=await Prisma.user.findUnique({
+        where:{
+            id:userId
+        }
+    })
+
+    if(requestedUser){
+        res.status(200);
+        res.json({"user":requestedUser,"message":"Successfully Fetched the requested User"})
+    }else{
+        res.status(404)
+        res.json({"message":"The requested user is not found"});
+    }
+}
+
 //delete the user
 const deleteUser=async(req,res)=>{
     const userId=req.body.id;
