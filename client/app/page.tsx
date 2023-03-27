@@ -25,17 +25,20 @@ export default async function Home() {
   console.log(data)
   return (
     <main className="w-[100%] min-h-[90vh]">
-      <div className=" min-h-[90vh] w-[100%] flex flex-wrap ">
+      <div className=" min-h-[90vh] w-[100%] flex flex-wrap justify-around">
        {
         data.length===0?<div>Loading......</div>:data.map((book)=> {
-          return <div className=" h-[20vh] w-[20%] bg-red-600">
+          return <div className="h-1/4 w-1/4 font-sans rounded-lg bg-[#f8f8f9] m-2">
             <Image
             src = {book.coverImage}
-            width = {144}
+            className=""
+            width={300}
             alt ="ksdjnfs"
-            height = {144}
+            height= {100}
             />
-            <h1>{book.bookName}</h1>
+            <h4 className="text-xl">{book.bookName}</h4>
+            <span className="text-sm">{book.isbn}</span>
+            <p className="text-base">{book.summary}</p>
           </div>
         })
        }
