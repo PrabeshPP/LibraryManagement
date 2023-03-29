@@ -19,6 +19,7 @@ model User{
   refreshToken RefreshToken?
   Book Book[]
   role String @default("user")
+  car Cart?
 }
 
 //Author Table
@@ -41,7 +42,9 @@ model Book{
   userId String
   user User @relation(fields: [userId],references: [id])
   authorId String 
+  isAvailable Boolean @default(true)
   author Author @relation(fields: [authorId],references: [id])
+  cartItem CartItem?
 }
 
 //Refresh Token Table
@@ -53,6 +56,24 @@ model RefreshToken{
   expiresAt DateTime
   createdAt DateTime @default(now())
   user User @relation(fields: [userId],references: [id])
+}
+
+//book-cart
+
+model Cart{
+  id String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId],references: [id])
+  cartItem CartItem[]
+}
+
+model CartItem{
+  id String @id @default(uuid())
+  cartId String
+  bookId String @unique
+  quantity Int
+  cart Cart @relation(fields: [cartId],references: [id])
+  book Book @relation(fields: [bookId],references: [id])
 }
 
 
