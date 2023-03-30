@@ -1,9 +1,5 @@
 import React from 'react'
-import Image from 'next/image';
-import bookIcon from "../../public/book-icon.svg";
-import {BsCartFill} from "react-icons/bs"
-import {IoBookSharp} from "react-icons/io5";
-import {BiLogIn} from "react-icons/bi";
+import Link from 'next/link'
 
 
 const NavBar = () => {
@@ -26,10 +22,10 @@ const NavBar = () => {
                 {/* <BsCartFill/> */}
                 <p className='ml-1'>Issued Books</p>
                 </div>
-            <div className='text-[#3b78ce] flex justify-center items-center text-lg font-semibold bg-[#fcfcfc] rounded-full cursor-pointer h-[65%] w-[20%] hover:bg-[#ebf1f9] hover:text-white'>
+            <Link href={"/signin"} className='text-[#3b78ce] flex justify-center items-center text-lg font-semibold bg-[#fcfcfc] rounded-full cursor-pointer h-[65%] w-[20%] hover:bg-[#ebf1f9] hover:text-white'>
                 {/* <BiLogIn/> */}
                 <p className=' ml-1'>Sign In</p>
-                </div>
+                </Link>
         </div>
     </div>
   )
