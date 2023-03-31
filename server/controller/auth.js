@@ -35,6 +35,7 @@ const createUser = async (req, res) => {
     });
 
     res.cookie("_j1", accessToken, {
+        maxAge:900000,
         withCredentials: true,
         secure: false,
         domain: "localhost"
@@ -89,7 +90,8 @@ const authenticateUser = async (req, res, next) => {
                 res.cookie("_j1", accessToken, {
                     withCredentials: true,
                     secure: false,
-                    domain: "localhost"
+                    domain: "localhost",
+                    maxAge:900000,
                 });
 
                 res.status(200);
@@ -109,6 +111,7 @@ const authenticateUser = async (req, res, next) => {
 
                 const accessToken = createAccessToken(payload);
                 res.cookie("_j1", accessToken, {
+                    maxAge:900000,
                     withCredentials: true,
                     secure: false,
                     domain: "localhost"
