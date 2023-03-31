@@ -99,7 +99,7 @@ const getAllAuthorBooks=async(req,res)=>{
 //get a specific Book
 
 const getSingleBook=async(req,res)=>{
-    const bookId=req.body.id;
+    const bookId=req.params.bookId;
     const book=await Prisma.book.findUnique({
         where:{
             id:bookId
@@ -127,4 +127,4 @@ const deleteBook=async(req,res)=>{
 //update the book
 /* To-do Task */
 
-module.exports={createBook,getAllBooks}
+module.exports={createBook,getAllBooks,getSingleBook}

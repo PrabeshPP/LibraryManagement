@@ -1,3 +1,5 @@
+import '../globals.css'
+
 export const metadata = {
     title: 'Login',
     description: 'Login page',
@@ -9,8 +11,10 @@ export const metadata = {
     children: React.ReactNode
   }) {
     return (
-        <body className='bg-white w-[100%] min-h-[100vh]'>
+        <html lang='en'>
+          <body className='w-[100%] min-h-[100vh]'>
           {children}</body>
+        </html>
       
     )
   }
