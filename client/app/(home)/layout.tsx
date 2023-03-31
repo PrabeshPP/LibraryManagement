@@ -1,3 +1,5 @@
+'use client'
+
 import '../globals.css'
 import NavBar from '@/Components/NavBar/NavBar'
 import Head from 'next/head'
@@ -17,7 +19,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className='bg-white w-[100%] min-h-[100vh]'>
+      <head>
+        <title>My Library</title>
+      </head>
+      <body className='bg-[#fff0e5] font-serif   w-[100%] min-h-[100vh]'>
         <NavBar/>
         {children}</body>
     </html>

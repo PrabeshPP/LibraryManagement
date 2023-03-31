@@ -3,6 +3,7 @@ const { hashPassword, comparePassword } = require("../utils/hash");
 const { createAccessToken, createRefreshToken, verifyToken } = require("../utils/token");
 
 
+
 const createUser = async (req, res) => {
 
     const firstName = req.body.firstName;
@@ -49,6 +50,7 @@ const createUser = async (req, res) => {
 const authenticateUser = async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+    console.log(email,password)
     const foundUser = await Prisma.user.findFirst({
         where: {
             email: email
