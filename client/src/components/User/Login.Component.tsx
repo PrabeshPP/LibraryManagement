@@ -1,12 +1,15 @@
-import React,{useState} from 'react'
+import React,{ useState} from 'react'
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import loginImg from "../../Assets/login.png";
 import libraryImg from "../../Assets/library.svg";
+import { setAuthToken } from '../../utils/setHeaders';
+import Cookies from 'js-cookie';
 
 const LoginComponent = () => {
     const navigate=useNavigate();
     const [showPassword,setShowPassword]=useState(false);
+
 
     const onShowPasswordClickListener=()=>{
         setShowPassword((showPassword)=>!showPassword)
@@ -27,7 +30,12 @@ const LoginComponent = () => {
                 },
                 withCredentials:true
             })
-            navigate("/")        
+            if(response){
+                const authToken=Cookies.get("_j1");
+                setAuthToken(authToken)
+                navigate("/")   
+            }
+                 
         }catch(err){
             console.log(err);
         }

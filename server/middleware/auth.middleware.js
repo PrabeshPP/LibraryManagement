@@ -42,7 +42,7 @@ const authMiddleware = async (req, res, next) => {
                     });
 
                     const accessToken = createAccessToken(payload);
-                    req.user=accessToken;
+                    req.token=accessToken;
                     res.cookie("_j1", accessToken, {
                         withCredentials: true,
                         secure: false,
@@ -55,7 +55,7 @@ const authMiddleware = async (req, res, next) => {
                     const decodedRefreshToken = verifyRefreshToken({ "token": refreshToken.token });
                     if (decodedRefreshToken != null) {
                         const accessToken = createAccessToken(payload);
-                        req.toke=accessToken;
+                        req.token=accessToken;
                         res.cookie("_j1", accessToken, {
                             withCredentials: true,
                             secure: false,

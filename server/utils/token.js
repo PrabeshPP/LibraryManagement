@@ -34,7 +34,9 @@ const verifyToken=(payload)=>{
 }
 
 const verifyRefreshToken=(payload)=>{
+
     const token=payload.token;
+    console.log(token)
     try{
         var decoded=jwt.verify(token,process.env.REFRESH_TOKEN)
         return decoded;
