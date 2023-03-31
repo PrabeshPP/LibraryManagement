@@ -22,7 +22,8 @@ const NavBar = () => {
         try{
             const response=await axios.post("/logout")
             if(response){
-                Cookies.remove("_j1")
+                Cookies.remove("_j1");
+                navigate("/");
             }
         }catch(err){
             console.log(err);
@@ -31,7 +32,7 @@ const NavBar = () => {
 
     useEffect(()=>{
 
-    },[])
+    },[authenticatedCookie])
 
     window.addEventListener("scroll",changeNavBarColor);
     //To do add on-scrollable
@@ -57,7 +58,7 @@ const NavBar = () => {
                 <p className='ml-1 hover:text-[#3a10e5] font-bold cursor-pointer'>Issued Books</p>
                 </div>
             {
-                authenticatedCookie?<div className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[65%] w-[15%] hover:bg-[#3b10e5ce] hover:text-white'>
+                authenticatedCookie?<div onClick={logoutHandler} className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[65%] w-[15%] hover:bg-[#3b10e5ce] hover:text-white'>
                 {/* <BsCartFill/> */}
                 <p className='ml-1'>Logout</p>
                 </div>:<NavLink to={"/signin"} className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[65%] w-[15%] hover:bg-[#3b10e5ce] hover:text-white'>
