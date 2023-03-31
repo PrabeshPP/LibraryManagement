@@ -1,7 +1,5 @@
-'use client'
-
-import HomePage from "@/Components/HomePage/HomePage";
-import { useEffect, useState } from "react";
+import React,{useState,useEffect} from 'react'
+import Card from '../../UI/Home/Book-UI';
 
 interface Book {
   id: string,
@@ -13,14 +11,10 @@ interface Book {
   coverImage: string
 }
 
-
-
-export default  function Home() {
-
+const Books = () => {
   const [books,setBooks]=useState([]);
   async function getData() {
     const response = await fetch("http://localhost:3001/books", {
-      next: { revalidate: 30 },
       method: "GET"
     })
     const data = await response.json()
@@ -41,10 +35,12 @@ export default  function Home() {
       <div className=" min-h-[90vh] w-[100%] flex flex-wrap justify-around mt-6">
         {
           books.length === 0 ? <div>Loading......</div> : books.map((book:Book) => {
-            return <HomePage key={book.id} Book={book}/>
+            return <Card key={book.id} Book={book}/>
           })
         }
       </div>
     </div>
   )
 }
+
+export default Books

@@ -2,8 +2,12 @@ import React,{useState,useEffect} from 'react'
 import {NavLink} from "react-router-dom"
 import Cookies from 'js-cookie'
 import {ImLibrary} from "react-icons/im"
+import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
+
 
 const NavBar = () => {
+    const navigate=useNavigate();
     const authenticatedCookie=Cookies.get("_j1");
     const [isScrolled,setScrolled]=useState(false);
     const changeNavBarColor=()=>{
@@ -13,6 +17,21 @@ const NavBar = () => {
             setScrolled(false);
         }
     }
+
+    const logoutHandler=async()=>{
+        try{
+            const response=await axios.post("/logout")
+            if(response){
+                Cookies.remove("_j1")
+            }
+        }catch(err){
+            console.log(err);
+        }
+    }
+
+    useEffect(()=>{
+
+    },[])
 
     window.addEventListener("scroll",changeNavBarColor);
     //To do add on-scrollable
