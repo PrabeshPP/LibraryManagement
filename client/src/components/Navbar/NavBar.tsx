@@ -48,15 +48,16 @@ const NavBar = () => {
                 <p className='text-sm text-[#10162f] font-bold font-sans'>My Library</p>
             </div>
         </NavLink>
+        
         <div className='h-[100%] w-[60%] flex flex-row justify-around items-center'>
             <NavLink to={"/books"} className='text-[#10162f] '>
                 {/* <IoBookSharp/> */}
                 <p className=' ml-1 hover:text-[#3a10e5] font-bold cursor-pointer'>Books</p>
                 </NavLink>
-            <div className='text-[#10162f]'>
+            <NavLink to={"/borrowed-books"} className='text-[#10162f]'>
                 {/* <BsCartFill/> */}
-                <p className='ml-1 hover:text-[#3a10e5] font-bold cursor-pointer'>Issued Books</p>
-                </div>
+                <p className='ml-1 hover:text-[#3a10e5] font-bold cursor-pointer'>Borrowed Books</p>
+                </NavLink>
             {
                 authenticatedCookie?<div onClick={logoutHandler} className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[65%] w-[15%] hover:bg-[#3b10e5ce] hover:text-white'>
                 {/* <BsCartFill/> */}
