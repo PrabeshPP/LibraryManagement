@@ -14,7 +14,7 @@ const port=process.env.PORT;
 
 const app=express();
 
-//cross-site 
+//cross-site
 app.use(cors({
     origin:["http://localhost:3000"],
     methods:["GET","POST","PUT","DELETE"],

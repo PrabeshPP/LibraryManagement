@@ -6,6 +6,7 @@ import BookDetail from './components/Book/Book-Detail';
 import Books from './components/Book/Books';
 import LoginPage from './pages/user/login';
 import Cookies from 'js-cookie'
+import Admin from './components/Admin/admin';
 import { setAuthToken } from './utils/setHeaders';
 import CartPage from './pages/Cart/Cart';
 
@@ -26,7 +27,7 @@ function App() {
         <Route path='/borrowed-books' element={<CartPage/>}/>
       </Route>
       <Route path='/signin' element={authToken?<Navigate to="/" replace/>:<LoginPage/>} />
-      
+      <Route path='/admin' element = {<Admin />} />
     </Routes>
     </>
   );
