@@ -64,7 +64,7 @@ const BookDetail = () => {
         <div className={classes["desc-container"]}>
             <img src={book.coverImage} alt={book.bookName} className=' h-[40%] w-[20%] mt-5 object-contain' />
           <div className=' h-[60%] w-[90%] flex flex-col pl-5'>
-            <p className=' text-2xl font-bold mt-5'>{book.isAvailable}</p>
+            <p className=' text-2xl font-bold mt-5'>{book.bookName}</p>
             <p className=' text-md font-semibold mt-2'>ISBN: {book.isbn}</p>
             <p className=' mt-2'>Author: Prabesh Bista</p>
             <p className=' mt-5'>{book.summary}</p>
