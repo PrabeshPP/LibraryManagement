@@ -48,6 +48,7 @@ const NavBar = () => {
                 <p className='text-sm text-[#10162f] font-bold font-sans'>My Library</p>
             </div>
         </NavLink>
+        
         <div className='h-[100%] w-[60%] flex flex-row justify-around items-center'>
             <NavLink to={"/books"} className='text-[#10162f] '>
                 {/* <IoBookSharp/> */}
