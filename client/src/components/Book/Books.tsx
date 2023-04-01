@@ -22,9 +22,6 @@ const Books = () => {
       setBooks(data.books);
     }
   }
-
-
-
   useEffect(()=>{
       getData()
   },[])

@@ -1,7 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Card from '../../UI/Home/Book-UI';
 
-
 interface Book {
     id: string,
     bookName: string,
@@ -22,10 +21,7 @@ const Home = () => {
       if(data){
         setBooks(data.books);
       }
-    }
-  
-  
-  
+    }  
     useEffect(()=>{
         getData()
     },[])

@@ -16,7 +16,6 @@ const Card = (props: any):JSX.Element => {
     const book: Book = props.Book
 
     return (
-
         <NavLink to={`/books/${book.id}`} key={book.id} className={classes.box}>
             <img
                 src={book.coverImage}
@@ -24,7 +23,6 @@ const Card = (props: any):JSX.Element => {
                 alt={book.bookName}
             />
             <p className='text-[#10162f] w-[90%]  text-md font-bold'>{book.bookName}</p>
-
         </NavLink>
     )
 }
