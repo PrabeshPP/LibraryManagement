@@ -88,7 +88,32 @@ const addToCart = async (req, res) => {
 }
 
 const removeFromCart = async (req, res) => {
-
+        const cartItemId=req.params.id;
+        const currentCartItem=await Prisma.cartItem.findUnique({
+            where:{
+                id:cartItemId
+            }
+        })
+        const updatedBook=await Prisma.book.update({
+            where:{
+                id:currentCartItem.bookId
+            },
+            data:{
+                isAvailable:true
+            }
+        })
+        const removedCartItem=await Prisma.cartItem.delete({
+            where:{
+                id:cartItemId
+            }
+        })
+        if(removedCartItem){
+            res.status(200)
+            res.json({"message":"Successfully removed the Item from the Cart"})
+        }else{
+            res.status(500)
+            res.json({"message":"Could't find the Item"})
+        }
 }
 
 const getAllItemFromCart = async (req, res) => {
@@ -124,5 +149,5 @@ const getAllItemFromCart = async (req, res) => {
 }
 
 
-module.exports = { addToCart, getAllItemFromCart }
+module.exports = { addToCart, getAllItemFromCart,removeFromCart }
 
