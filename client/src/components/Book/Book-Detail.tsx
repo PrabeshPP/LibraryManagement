@@ -16,13 +16,13 @@ interface Book {
   }
 
 const BookDetail = () => {
+  const [booked, setBooked] = useState(false)
     const navigate=useNavigate();
     const authToken=Cookies.get("_j1");
     const params=useParams()
     const id=params.id
     const [book,setBook]=useState<Book>();
     const getSingleBook=async ()=>{
-
         try{
             const response = await axios.get(`http://localhost:3001/books/${id}`, {
             withCredentials: true
@@ -36,6 +36,7 @@ const BookDetail = () => {
     }
 
     const onAddToCart=async()=>{
+      setBooked(false);
         if(authToken){
           //To do add to cart item
             try{
@@ -56,7 +57,7 @@ const BookDetail = () => {
 
     useEffect(()=>{
         getSingleBook();
-    },[])
+    },[booked])
   return (
    <div className='h-[90vh] w-[100%]'>
      {
