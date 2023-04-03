@@ -27,7 +27,7 @@ const Books = () => {
   },[])
 
   return (
-    <div className="w-[100%] min-h-[90vh]">
+    <div className="w-[100%] min-h-[90vh] pb-4">
       <div className=" min-h-[90vh] w-[100%] flex flex-wrap justify-around mt-6">
         {
           books.length === 0 ? <div>Loading......</div> : books.map((book:Book) => {

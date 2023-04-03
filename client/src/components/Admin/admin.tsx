@@ -13,7 +13,7 @@ interface Book {
   }
 
 
-const Admin = () => {
+const AdminDashBoard = () => {
     const [books,setBooks]=useState([]);
     const [bookCount, setBookCount] = useState(0);
     const [isAvailableCount, setIsAvailable] = useState(0);
@@ -47,10 +47,9 @@ const Admin = () => {
     }
     return (
         <div className = "bg-[#fff0e5] h-screen">
-            <AdminNavBar />
             <h1 className='text-xl text-center uppercase mt-4 font-bold'>Admin Dashboard</h1>
             <br />
-            <div className='p-2 border-2 rounded-[20px] flex flex-col w-1/4 m-4 bg-white text-center h-40 justify-center relative' onClick={containerDisplayHandler} >
+            <div  className=' cursor-pointer p-2 border-2 rounded-[20px] flex flex-col w-1/4 m-4 bg-white text-center h-40 justify-center relative' onClick={containerDisplayHandler} >
                 <i className="uil uil-books text-4xl"></i>
                 <i className='uil uil-angle-right-b absolute right-2'></i>
                 <span className = "text-lg font-bold">Registered Books</span>
@@ -70,4 +69,4 @@ const Admin = () => {
     )
 }
 
-export default Admin
+export default AdminDashBoard

@@ -10,6 +10,7 @@ const NavBar = () => {
     const navigate=useNavigate();
     const authenticatedCookie=Cookies.get("_j1");
     const [isScrolled,setScrolled]=useState(false);
+
     const changeNavBarColor=()=>{
         if(window.scrollY>=10){
             setScrolled(true);
@@ -32,7 +33,7 @@ const NavBar = () => {
 
     useEffect(()=>{
 
-    },[authenticatedCookie])
+    },[authenticatedCookie,logoutHandler])
 
     window.addEventListener("scroll",changeNavBarColor);
     //To do add on-scrollable
