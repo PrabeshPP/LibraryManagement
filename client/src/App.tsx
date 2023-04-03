@@ -16,6 +16,7 @@ import AdminPage from './pages/admin/admin-page';
 import AdminDashBoard from './components/Admin/admin';
 import AdminSignIn from './components/Admin/auth/signin';
 import AdminSignUp from './components/Admin/auth/signup';
+import CreateBook from './components/Book/Book-Create';
 
 function App() {
   const authToken = Cookies.get('_j1');
@@ -39,6 +40,7 @@ function App() {
         <Route path='/admin' element={<AdminPage/>}>
           <Route path='/admin' element={<AdminDashBoard/>} />
           <Route path='/admin/books' element={<AdminBookUI/>}/>
+          <Route path = '/admin/books/create' element = {<CreateBook />} />
           <Route path='/admin/users' element={<AdminUserUI/>}/>
         </Route>
         <Route path='/admin/signin' element={authToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>
