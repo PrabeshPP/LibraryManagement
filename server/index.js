@@ -7,6 +7,7 @@ const authMiddleware=require("./middleware/auth.middleware");
 const bookRouter=require("./routes/Books/books");
 const adminRouter=require("./routes/admin/adminAuthentication");
 const cartRouter=require("./routes/cart/cart.routes");
+const userRouter=require("./routes/users/user.routes");
 
 
 dotenv.config();
@@ -21,12 +22,7 @@ app.use(cors({
     credentials:true
 }));
 
-// app.use((req, res, next) => {
-//     res.setHeader('Access-Control-Allow-Origin', '*');
-//     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-//     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-//     next();
-// });
+
 
 
 app.use(express.json());
@@ -36,6 +32,7 @@ app.use(authenticationUserRoute);
 app.use(bookRouter);
 app.use("/admin",adminRouter)
 app.use(cartRouter)
+app.use(userRouter)
 
 app.use("/res",authMiddleware,(req,res)=>{
     

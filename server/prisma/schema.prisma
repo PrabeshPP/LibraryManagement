@@ -16,10 +16,18 @@ model User{
   lastName String
   email String @unique
   password String
-  refreshToken RefreshToken?
-  Book Book[]
   role String @default("user")
   cart Cart?
+}
+
+model Admin{
+  id String @id @default(uuid())
+  firstName String 
+  lastName String
+  email String @unique
+  password String
+  Book Book[]
+  role String @default("user")
 }
 
 //Author Table
@@ -39,24 +47,15 @@ model Book{
   isbn String
   summary String
   coverImage String
-  userId String
-  user User @relation(fields: [userId],references: [id])
+  adminId String
+  user Admin @relation(fields: [adminId],references: [id])
   authorId String 
   isAvailable Boolean @default(true)
   author Author @relation(fields: [authorId],references: [id])
   cartItem CartItem?
 }
 
-//Refresh Token Table
 
-model RefreshToken{
-  id String @id @default(uuid())
-  userId String @unique
-  token String @unique
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-  user User @relation(fields: [userId],references: [id])
-}
 
 //book-cart
 

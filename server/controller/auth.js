@@ -4,6 +4,7 @@ const { createAccessToken, createRefreshToken, verifyToken } = require("../utils
 
 
 
+
 const createUser = async (req, res) => {
 
     const firstName = req.body.firstName;
@@ -22,20 +23,9 @@ const createUser = async (req, res) => {
     })
     const payload = { "email": user.email }
     const accessToken = createAccessToken(payload);
-    const refreshToken = createRefreshToken(payload);
-
-    const storeRefreshToken = await Prisma.refreshToken.create({
-        data: {
-            token: refreshToken,
-            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-            user: {
-                connect: { id: user.id }
-            }
-        }
-    });
 
     res.cookie("_j1", accessToken, {
-        maxAge:900000,
+        maxAge:1000*10*24*60*60,
         withCredentials: true,
         secure: false,
         domain: "localhost"
@@ -51,7 +41,6 @@ const createUser = async (req, res) => {
 const authenticateUser = async (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
-    console.log(email,password)
     const foundUser = await Prisma.user.findFirst({
         where: {
             email: email
@@ -64,64 +53,17 @@ const authenticateUser = async (req, res, next) => {
         const result = await comparePassword(password, hashedPassword);
         if (result) {
             const payload = { "email": foundUser.email }
-            const resultedRefreshToken = await Prisma.refreshToken.findFirst({
-                where: {
-                    userId: foundUser.id
-                }
-            });
-            if (resultedRefreshToken != null) {
-                const expiresAt = new Date(resultedRefreshToken.expiresAt)
-                if (expiresAt < new Date()) {
-
-                    const refreshToken = createRefreshToken(payload);
-                    const storeRefreshToken = await Prisma.refreshToken.create({
-                        data: {
-                            token: refreshToken,
-                            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                            user: {
-                                connect: { id: foundUser.id }
-                            }
-                        }
-                    });
-
-                }
 
                 const accessToken = createAccessToken(payload);
                 res.cookie("_j1", accessToken, {
                     withCredentials: true,
                     secure: false,
                     domain: "localhost",
-                    maxAge:900000,
+                    maxAge:1000*10*24*60*60,
                 });
 
                 res.status(200);
                 res.json({ "message": "Successfully Logged In!" });
-                
-            } else {
-                const refreshToken = createRefreshToken(payload);
-                const storeRefreshToken = await Prisma.refreshToken.create({
-                    data: {
-                        token: refreshToken,
-                        expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                        user: {
-                            connect: { id: foundUser.id }
-                        }
-                    }
-                });
-
-                const accessToken = createAccessToken(payload);
-                res.cookie("_j1", accessToken, {
-                    maxAge:900000,
-                    withCredentials: true,
-                    secure: false,
-                    domain: "localhost"
-                });
-
-                res.status(200);
-                res.json({ "message": "Successfully Logged In!" });
-
-            }
-
         }
     }else{
         res.status(401);
@@ -129,28 +71,28 @@ const authenticateUser = async (req, res, next) => {
     }
 }
 
-const logoutUser = async (req, res) => {
-    const header = req.headers.authorization;
-    const token = header.split(" ")[1]
-    const result = verifyToken({ "token": token })
-    const user = await Prisma.user.findFirst({
-        where: {
-            email: result.email
-        }
-    });
-    if (user) {
-        const deletedToken = await Prisma.refreshToken.delete({
-            where: {
-                userId: user.id
-            }
-        });
-        res.status(200);
-        res.json({ "message": "Successfully Logged Out!" })
-    } else {
-        res.status(401);
-        res.json({ "message": "User not Found!" })
-    }
-}
+// const logoutUser = async (req, res) => {
+//     const header = req.headers.authorization;
+//     const token = header.split(" ")[1]
+//     const result = verifyToken({ "token": token })
+//     const user = await Prisma.user.findFirst({
+//         where: {
+//             email: result.email
+//         }
+//     });
+//     if (user) {
+//         const deletedToken = await Prisma.refreshToken.delete({
+//             where: {
+//                 userId: user.id
+//             }
+//         });
+//         res.status(200);
+//         res.json({ "message": "Successfully Logged Out!" })
+//     } else {
+//         res.status(401);
+//         res.json({ "message": "User not Found!" })
+//     }
+// }
 
 
-module.exports = { createUser, authenticateUser, logoutUser }
+module.exports = { createUser, authenticateUser}

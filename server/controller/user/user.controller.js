@@ -65,3 +65,6 @@ const updateUser=async(req,res)=>{
     res.json({"message":"Successfully Update the User!"})
 
 }
+
+
+module.exports={getAllUser,getSingleUser,updateUser,deleteUser}
