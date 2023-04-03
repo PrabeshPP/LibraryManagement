@@ -6,11 +6,11 @@ import { NavLink } from "react-router-dom";
 
 const MainPage = () => {
     const onUserBoxClick = () => {
-        Cookies.set("preferences", "user")
+        Cookies.set("preferences", "user",{expires:30})
     }
 
     const onAdminBoxClick = () => {
-        Cookies.set("preferences", "admin")
+        Cookies.set("preferences", "admin",{expires:30})
     }
 
     return (

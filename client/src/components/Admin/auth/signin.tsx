@@ -65,7 +65,7 @@ const AdminSignIn=()=>{
                 {" "}
                 Don't have an account?{" "}
                 <NavLink
-                    to={"/signup"}
+                    to={"/admin/signup"}
                     className="font-medium text-purple-600 hover:underline"
                 >
                     Sign up

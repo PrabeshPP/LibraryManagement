@@ -15,6 +15,7 @@ import AdminUserUI from './components/Admin/admin-user';
 import AdminPage from './pages/admin/admin-page';
 import AdminDashBoard from './components/Admin/admin';
 import AdminSignIn from './components/Admin/auth/signin';
+import AdminSignUp from './components/Admin/auth/signup';
 
 function App() {
   const authToken = Cookies.get('_j1');
@@ -41,7 +42,7 @@ function App() {
           <Route path='/admin/users' element={<AdminUserUI/>}/>
         </Route>
         <Route path='/admin/signin' element={authToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>
-        <Route path='/admin/signup' element={authToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>
+        <Route path='/admin/signup' element={authToken?<Navigate to="/admin" replace/>:<AdminSignUp/>}/>
       </Routes>
     </>
   );
