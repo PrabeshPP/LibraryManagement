@@ -69,4 +69,4 @@ const authenticateAdmin=async (req, res, next) => {
     }
 }
 
-module.exports = { createAdmin, authenticateAdmin,createAdmin,authenticateAdmin}
+module.exports = { createAdmin, authenticateAdmin}
