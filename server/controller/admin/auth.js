@@ -31,9 +31,6 @@ const createAdmin=async (req, res) => {
 
     res.status(200);
     res.json({ "message": "Successfully Created an Account" });
-
-
-
 }
 
 const authenticateAdmin=async (req, res, next) => {
