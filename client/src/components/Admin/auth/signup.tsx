@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { setAuthToken } from "../../../utils/setHeaders";
 
 const AdminSignUp=()=>{
     const navigate=useNavigate();
@@ -24,8 +26,8 @@ const AdminSignUp=()=>{
         const response=await axios.post("/admin/signup",data,{
             withCredentials:true
         })
-
-
+        const token=Cookies.get("_j1")
+        setAuthToken(token)
         navigate("/admin")      
     }
 

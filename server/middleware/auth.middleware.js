@@ -7,40 +7,20 @@ const authMiddleware = async (req, res, next) => {
     if (token) {
         const result = verifyToken({ "token": token })
         if (result != null) {
+            req.token=token
             const currentTime = Date.now()
             const expirationTime = result.exp * 1000;
-            if (expirationTime - currentTime <= 60 * 1000 * 2) {
+            if (expirationTime - currentTime <= 60 * 1000 * 60*24) {
                 const user = await Prisma.user.findFirst({
                     where: {
                         email: result.email
                     }
                 })
-                const refreshToken = await Prisma.refreshToken.findFirst({
-                    where: {
-                        userId: user.id
-                    }
-                });
-
+                
                 const payload = { "email": user.email }
                 const expiresAt = new Date(refreshToken.expiresAt)
 
                 if (expiresAt < new Date()) {
-                    const deletedToken = await Prisma.refreshToken.delete({
-                        where: {
-                            token: refreshToken
-                        }
-                    })
-                    const refreshToken = createRefreshToken(payload);
-                    const storeRefreshToken = await Prisma.refreshToken.create({
-                        data: {
-                            token: refreshToken,
-                            expiresAt: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000),
-                            user: {
-                                connect: { id: user.id }
-                            }
-                        }
-                    });
-
                     const accessToken = createAccessToken(payload);
                     req.token=accessToken;
                     res.cookie("_j1", accessToken, {
@@ -52,21 +32,7 @@ const authMiddleware = async (req, res, next) => {
                     next();
 
                 } else {
-                    const decodedRefreshToken = verifyRefreshToken({ "token": refreshToken.token });
-                    if (decodedRefreshToken != null) {
-                        const accessToken = createAccessToken(payload);
-                        req.token=accessToken;
-                        res.cookie("_j1", accessToken, {
-                            withCredentials: true,
-                            secure: false,
-                            domain: "localhost"
-                        });
-
-                        next();
-                    } else {
-                        res.status(401);
-                        res.json({ "message": "Not Authorized!" })
-                    }
+                    next()
                 }
             } else {
                 req.token=token;

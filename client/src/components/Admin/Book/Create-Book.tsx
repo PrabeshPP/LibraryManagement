@@ -1,12 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { AiFillCamera, AiOutlineClose } from "react-icons/ai"
-import { BiError } from "react-icons/bi"
 import axios from 'axios'
+import { useNavigate } from 'react-router'
+import Cookies from "js-cookie"
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 const CreateBook = () => {
+    const notify = async ({ error, message }: { error: boolean, message: string }) => {
+        if (error) {
+            toast.error(message)
+        } else {
+            toast.success(message)
+        }
+    }
+
+    const navigate = useNavigate()
+    const authToken = Cookies.get("_j1")
     const coverImageRef: any = useRef(null);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const [coverImageFile, setCoverImageFile] = useState("");
     const [coverImage, setCoverImage] = useState("");
+
+
+    //checking wheather the required field are inputted correctly or not
+    const [errorBookTitle, setErrorBookTitle] = useState<boolean>(false)
+    const [errorIsbn, setErrorIsbn] = useState<boolean>(false)
+    const [errorAuthorFirstName, setErrorFirstName] = useState<boolean>(false)
+    const [errorAuthorLastName, setErrorLastName] = useState<boolean>(false)
+    const [errorSummary, setErrorSummary] = useState<boolean>(false)
+
+
+    //function to check whether the input value is wrong or not 
+    function isBookTitleOk(value: string) {
+        if (!value) {
+            setErrorBookTitle(true)
+        } else {
+            setErrorBookTitle(false)
+        }
+    }
 
     function loadCoverImage(event: any) {
         setCoverImageFile(event.target.files[0]);
@@ -22,6 +56,56 @@ const CreateBook = () => {
 
     }
 
+    const onSubmitHandler = async (event: any) => {
+        event.preventDefault()
+
+        const bookTitle = event.target.bookTitle.value;
+        const bookIsbn = event.target.isbn.value;
+        const authorFirstName = event.target.firstName.value;
+        const authorLastName = event.target.lastName.value;
+        const bookSummary = event.target.summary.value;
+
+        if ((!bookTitle || !bookIsbn) || (!authorFirstName || !authorLastName) || !bookSummary) {
+
+            notify({ error: true, message: "All the fields are required" })
+
+        } else {
+
+            setIsLoading(true);
+            const formData = new FormData();
+            formData.append("bookName", bookTitle)
+            formData.append("summary", bookSummary)
+            formData.append("isbn", bookIsbn)
+            formData.append("authorFirstName", authorFirstName)
+            formData.append("authorLastName", authorLastName)
+            formData.append("image", coverImageFile)
+            const response = await axios.post("/create-book", formData, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`
+                },
+                withCredentials: true
+            })
+            event.target.bookTitle.value = ""
+            event.target.isbn.value = ""
+            event.target.firstName.value = ""
+            event.target.lastName.value = ""
+            event.target.summary.value = ""
+            deleteCoverImageInput()
+            //@ts-ignore
+            setCoverImage((coverImage) => undefined)
+            setIsLoading(false);
+            notify({ error: false, message: "Successfully added a book!" })
+        }
+
+
+
+
+    }
+
+    useEffect(() => {
+
+    }, [authToken, notify])
+
 
     return (
         <div className='flex-col flex justify-center items-center min-h-[90vh] w-[100%] pb-10 pt-10'>
@@ -29,8 +113,8 @@ const CreateBook = () => {
                 <h1 className="text-3xl font-semibold font-serif text-center text-black ">
                     Add Book
                 </h1>
-
-                <form className="mt-6">
+                <ToastContainer pauseOnFocusLoss={false} closeButton={true} closeOnClick={true} draggable={false} pauseOnHover={false} autoClose={3000} limit={5} />
+                <form onSubmit={isLoading ? () => { } : onSubmitHandler} className="mt-6">
 
                     <div className="mb-2">
                         <label
@@ -39,9 +123,15 @@ const CreateBook = () => {
                             Book Title
                         </label>
                         <input
+                            onChange={(event) => {
+                                isBookTitleOk(event.target.value)
+                            }}
+                            onBlur={(event) => {
+                                isBookTitleOk(event.target.value)
+                            }}
                             name="bookTitle"
                             type="text"
-                            className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                            className={errorBookTitle ? "block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-red-500 focus:outline-none focus:ring focus:ring-opacity-40" : "block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"}
                         />
                     </div>
                     <div className="mb-2">
@@ -122,7 +212,7 @@ const CreateBook = () => {
                     </output>
 
                     <div className="mt-6">
-                        <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600">
+                        <button type="submit" className={isLoading ? "w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-500 rounded-md  focus:outline-none  cursor-not-allowed" : "w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600"}>
                             Add
                         </button>
                     </div>

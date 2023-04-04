@@ -1,24 +1,27 @@
 import { NavLink } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { setAuthToken } from "../../../utils/setHeaders";
+import Cookies from "js-cookie";
 
 const AdminSignIn=()=>{
     const navigate=useNavigate();
     const onSubmitForm=async(event:any)=>{
         event.preventDefault()
-        // const email=event.target.email.value;
-        // const password=event.target.password.value;
-        // const data={
-        //     "email":email,
-        //     "password":password
-        // }
+        const email=event.target.email.value;
+        const password=event.target.password.value;
+        const data={
+            "email":email,
+            "password":password
+        }
 
-        // // This is where I will send request to the backend to authenticate
-        // const response=await axios.post("/api/user/login",data,{
-        //     withCredentials:true
-        // })
-
-
+        console.log("Logged In")
+        // This is where I will send request to the backend to authenticate
+        const response=await axios.post("/admin/login",data,{
+            withCredentials:true
+        })
+        const token=Cookies.get('_j1');
+        setAuthToken(token)
         navigate("/")      
     }
 
