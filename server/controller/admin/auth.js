@@ -42,13 +42,15 @@ const authenticateAdmin=async (req, res, next) => {
         }
     });
 
+    
+
 
     if (foundUser) {
         const hashedPassword = foundUser.password;
         const result = await comparePassword(password, hashedPassword);
         if (result) {
             const payload = { "email": foundUser.email }
-
+                console.log("hii")
                 const accessToken = createAccessToken(payload);
                 res.cookie("_j1", accessToken, {
                     withCredentials: true,
@@ -56,9 +58,12 @@ const authenticateAdmin=async (req, res, next) => {
                     domain: "localhost",
                     maxAge:1000*10*24*60*60,
                 });
-
+                
                 res.status(200);
                 res.json({ "message": "Successfully Logged In!" });
+        }else{
+            res.status(401);
+            res.json({"message":"Not Authorized!"})
         }
     }else{
         res.status(401);
@@ -66,4 +71,4 @@ const authenticateAdmin=async (req, res, next) => {
     }
 }
 
-module.exports = { createAdmin, authenticateAdmin,createAdmin,authenticateAdmin}
+module.exports = { createAdmin, authenticateAdmin}

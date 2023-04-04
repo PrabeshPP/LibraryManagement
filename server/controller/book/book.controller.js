@@ -17,7 +17,7 @@ const createBook=async(req,res)=>{
     // console.log(authorLastName)
 
 
-    //find author with that Name
+    // //find author with that Name
     const atuhorExist=await Prisma.author.findFirst({
         where:{
             firstName:authorFirstName,

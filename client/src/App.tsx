@@ -16,7 +16,8 @@ import AdminPage from './pages/admin/admin-page';
 import AdminDashBoard from './components/Admin/admin';
 import AdminSignIn from './components/Admin/auth/signin';
 import AdminSignUp from './components/Admin/auth/signup';
-import CreateBook from './components/Book/Book-Create.js';
+import CreateBook from './components/Admin/Book/Create-Book';
+
 
 function App() {
   const authToken = Cookies.get('_j1');
@@ -29,7 +30,7 @@ function App() {
   return (
     <>
       <Routes>
-        <Route path='/' element={!preferences ? <MainPage /> : preferences === 'admin' ? <Navigate to="/admin" replace /> : <Navigate to="/home" replace />} />
+        <Route path='*' element={!preferences ? <MainPage /> : preferences === 'admin' ? <Navigate to="/admin" replace /> : <Navigate to="/home" replace />} />
         <Route path="/home" element={<UserInterface />}>
           <Route path='/home' element={<Home />} />
           <Route path="/home/books/:id" element={<BookDetail />} />
@@ -40,7 +41,7 @@ function App() {
         <Route path='/admin' element={<AdminPage/>}>
           <Route path='/admin' element={<AdminDashBoard/>} />
           <Route path='/admin/books' element={<AdminBookUI/>}/>
-          <Route path = '/admin/books/create' element = {<CreateBook />} />
+          <Route path = '/admin/books/create' element = {<CreateBook/>} />
           <Route path='/admin/users' element={<AdminUserUI/>}/>
         </Route>
         <Route path='/admin/signin' element={authToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>

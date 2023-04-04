@@ -8,11 +8,12 @@ const checkAdmin=async(req,res,next)=>{
 
     //
     if(result){
-        const user=await Prisma.user.findUnique({
+        const user=await Prisma.admin.findUnique({
             where:{
                 email:result.email
             }
         })
+        
         if(user){
             const role=user.role;
             if(role==="admin"){

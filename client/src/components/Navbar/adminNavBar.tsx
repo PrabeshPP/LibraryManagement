@@ -1,18 +1,20 @@
 import { NavLink } from "react-router-dom"
 import { ImLibrary } from "react-icons/im"
-
+import {useState,useEffect} from "react"
+import Cookies from "js-cookie"
+import { useNavigate } from "react-router-dom"
 
 const AdminNavBar = () => {
-    // const navigate=useNavigate();
-    // const authenticatedCookie=Cookies.get("_j1");
-    // const [isScrolled,setScrolled]=useState(false);
-    // const changeNavBarColor=()=>{
-    //     if(window.scrollY>=10){
-    //         setScrolled(true);
-    //     }else{
-    //         setScrolled(false);
-    //     }
-    // }
+    const navigate=useNavigate();
+    const authenticatedCookie=Cookies.get("_j1");
+    const [isScrolled,setScrolled]=useState(false);
+    const changeNavBarColor=()=>{
+        if(window.scrollY>=10){
+            setScrolled(true);
+        }else{
+            setScrolled(false);
+        }
+    }
 
     // const logoutHandler=async()=>{
     //     try{
@@ -26,15 +28,15 @@ const AdminNavBar = () => {
     //     }
     // }
 
-    // useEffect(()=>{
+    useEffect(()=>{
 
-    // },[authenticatedCookie])
+    },[authenticatedCookie])
 
-    // window.addEventListener("scroll",changeNavBarColor);
+    window.addEventListener("scroll",changeNavBarColor);
     // //To do add on-scrollable
     // // const [isScrolled,setScrolled]=useState(false)
     return (
-        <div className="font-sans h-[10vh] w-[100%] flex flex-row justify-between sticky top-0 z-50 transition-all border-solid border-b-4 border-black shadow-lg bg=[#f4f4f4]">
+        <div className={isScrolled?'font-sans h-[10vh] w-[100%] flex flex-row justify-between sticky top-0 z-50 bg-[#fbd49e] transition-all':'font-sans h-[10vh] w-[100%] flex flex-row justify-between sticky top-0 z-50 transition-all'}>
             <NavLink to={"/"} className='h-[100%] w-[15%] flex flex-row  items-center cursor-pointer'>
                 <div className=' h-[80%] w-[30%] relative curs'>
                     {/* <Image src={bookIcon}  alt="Library Icon" fill/> */}

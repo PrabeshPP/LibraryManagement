@@ -1,25 +1,34 @@
 import { NavLink } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
+import { setAuthToken } from "../../../utils/setHeaders";
 
 const AdminSignUp=()=>{
     const navigate=useNavigate();
+
     const onSubmitForm=async(event:any)=>{
         event.preventDefault()
-        // const email=event.target.email.value;
-        // const password=event.target.password.value;
-        // const data={
-        //     "email":email,
-        //     "password":password
-        // }
+        const email=event.target.email.value;
+        const password=event.target.password.value;
+        const firstName=event.target.firstName.value;
+        const lastName=event.target.lastName.value;
+        // const confirmPassword=event.target.confirmPassword;
+    
+        const data={
+            "email":email,
+            "password":password,
+            firstName:firstName,
+            lastName:lastName
+        }
 
         // // This is where I will send request to the backend to authenticate
-        // const response=await axios.post("/api/user/login",data,{
-        //     withCredentials:true
-        // })
-
-
-        // navigate("/")      
+        const response=await axios.post("/admin/signup",data,{
+            withCredentials:true
+        })
+        const token=Cookies.get("_j1")
+        setAuthToken(token)
+        navigate("/admin")      
     }
 
     return(
@@ -37,8 +46,8 @@ const AdminSignUp=()=>{
                         First Name
                     </label>
                     <input
-                        name="email"
-                        type="email"
+                        name="firstName"
+                        type="text"
                         className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                 </div>
@@ -49,8 +58,8 @@ const AdminSignUp=()=>{
                         Last Name
                     </label>
                     <input
-                        name="email"
-                        type="email"
+                        name="lastName"
+                        type="text"
                         className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
                 </div>
@@ -81,18 +90,18 @@ const AdminSignUp=()=>{
                     />
                 </div>
 
-                <div className="mb-2">
+                {/* <div className="mb-2">
                     <label
                         className="block text-sm font-semibold text-gray-800"
                     >
                         Confirm Password
                     </label>
                     <input
-                        name="password"
+                        name="confirmPassword"
                         type="password"
                         className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                     />
-                </div>
+                </div> */}
 
                 <div className="mt-6">
                     <button type="submit" className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600">
