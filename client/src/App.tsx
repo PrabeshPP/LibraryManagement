@@ -24,9 +24,6 @@ function App() {
   const adminAuthToken=Cookies.get('_aj1');
   const preferences = Cookies.get('preferences')
 
-
-
-  setAuthToken(authToken)
   return (
     <>
       <Routes>

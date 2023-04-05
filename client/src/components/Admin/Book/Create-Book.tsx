@@ -212,9 +212,12 @@ const CreateBook = () => {
                     </output>
 
                     <div className="mt-6">
-                        <button type="submit" className={isLoading ? "w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-500 rounded-md  focus:outline-none  cursor-not-allowed" : "w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600"}>
+                        {
+                            isLoading?<div className='"w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-500 rounded-md  focus:outline-none  cursor-not-allowed"'> Adding....</div>:<button type="submit" className={"w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600"}>
                             Add
                         </button>
+                        }
+                        
                     </div>
                 </form>
             </div>
