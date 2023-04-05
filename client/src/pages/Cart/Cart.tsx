@@ -7,7 +7,7 @@ import axios from 'axios';
 import classes from "./Cart.module.css";
 
 const CartPage = () => {
-  const authToken = Cookies.get('_j1')
+  const authToken = Cookies.get('_uj1')
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingRemove, setIsLoadingRemove] = useState(false)
@@ -17,7 +17,11 @@ const CartPage = () => {
     if (authToken) {
       try {
         setIsLoadingRemove(true);
-        const response = await axios.get(`/remove/${id}`);
+        const response = await axios.get(`/remove/${id}`,{
+          headers:{
+            Authorization:`Bearer ${authToken}`
+          }
+        });
         if (response) {
           setIsLoadingRemove(false);
         } else {
@@ -32,7 +36,11 @@ const CartPage = () => {
   const fetchCartItem = useCallback(async () => {
     if (authToken) {
       try {
-        const response = await axios.get("/cart-items");
+        const response = await axios.get("/cart-items",{
+          headers:{
+            Authorization:`Bearer ${authToken}`
+          }
+        });
         if (response) {
           setIsLoading(false);
           setData(response.data.message);

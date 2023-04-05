@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom"
 
 const AdminNavBar = () => {
     const navigate=useNavigate();
-    const authenticatedCookie=Cookies.get("_j1");
+    const authenticatedCookie=Cookies.get("_aj1");
     const [isScrolled,setScrolled]=useState(false);
     const changeNavBarColor=()=>{
         if(window.scrollY>=10){
@@ -18,7 +18,8 @@ const AdminNavBar = () => {
 
     const logoutHandler=async()=>{
                 Cookies.remove("_aj1");
-                navigate("/");
+                Cookies.remove("preferences")
+                navigate("/admin");
         
     }
 
@@ -53,10 +54,10 @@ const AdminNavBar = () => {
                     {/* <IoBookSharp/> */}
                     <p className=' ml-1 hover:text-[#3a10e5] font-bold cursor-pointer'>Books</p>
                 </NavLink>
-                <NavLink to={"/admin/signin"} className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[65%] w-[15%] hover:bg-[#3b10e5ce] hover:text-white'>
+                <div onClick={logoutHandler} className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[65%] w-[15%] hover:bg-[#3b10e5ce] hover:text-white'>
                     {/* <BiLogIn/> */}
                     <p className=' ml-1'>LogOut</p>
-                </NavLink>
+                </div>
             </div>
         </div>
     )

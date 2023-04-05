@@ -22,7 +22,7 @@ const AdminSignIn=()=>{
         })
         const token=Cookies.get('_j1');
         setAuthToken(token)
-        navigate("/")      
+        navigate("/admin")      
     }
 
     return(
