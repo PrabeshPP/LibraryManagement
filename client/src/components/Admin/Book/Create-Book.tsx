@@ -18,7 +18,7 @@ const CreateBook = () => {
     }
 
     const navigate = useNavigate()
-    const authToken = Cookies.get("_j1")
+    const authToken = Cookies.get("_aj1")
     const coverImageRef: any = useRef(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [coverImageFile, setCoverImageFile] = useState("");
@@ -114,7 +114,7 @@ const CreateBook = () => {
                     Add Book
                 </h1>
                 <ToastContainer pauseOnFocusLoss={false} closeButton={true} closeOnClick={true} draggable={false} pauseOnHover={false} autoClose={3000} limit={5} />
-                <form onSubmit={isLoading ? () => { } : onSubmitHandler} className="mt-6">
+                <form onSubmit={isLoading ? () => {return false } : onSubmitHandler} className="mt-6">
 
                     <div className="mb-2">
                         <label
@@ -193,7 +193,7 @@ const CreateBook = () => {
                         <AiFillCamera className='text-2xl ml-3' />
                         <input ref={coverImageRef} onChange={(event) => {
                             loadCoverImage(event)
-                        }} accept="image/png, image/jpeg, image/jpg" className=" hidden"
+                        }} accept="image/png, image/jpeg, image/jpg , image/webp" className=" hidden"
                             name="coverImage" type="file" />
                     </label>
                     <output className={coverImage ? "h-[30vh] w-[100%] flex flex-row items-center mt-5 justify-around" : "hidden"} id="coverImage">

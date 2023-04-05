@@ -20,13 +20,13 @@ import CreateBook from './components/Admin/Book/Create-Book';
 
 
 function App() {
-  const authToken = Cookies.get('_j1');
+  const authToken = Cookies.get('_uj1');
+  const adminAuthToken=Cookies.get('_aj1');
   const preferences = Cookies.get('preferences')
 
-  setAuthToken(authToken)
-  useEffect(() => {
 
-  }, [authToken])
+
+  setAuthToken(authToken)
   return (
     <>
       <Routes>
@@ -37,15 +37,15 @@ function App() {
           <Route path='/home/books' element={<Books />} />
           <Route path='/home/borrowed-books' element={<CartPage />} />
         </Route>
-        <Route path='/signin' element={authToken ? <Navigate to="/home" replace /> : <LoginPage />} />
+        <Route path='/signin' element={adminAuthToken ? <Navigate to="/home" replace /> : <LoginPage />} />
         <Route path='/admin' element={<AdminPage/>}>
           <Route path='/admin' element={<AdminDashBoard/>} />
           <Route path='/admin/books' element={<AdminBookUI/>}/>
           <Route path = '/admin/books/create' element = {<CreateBook/>} />
           <Route path='/admin/users' element={<AdminUserUI/>}/>
         </Route>
-        <Route path='/admin/signin' element={authToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>
-        <Route path='/admin/signup' element={authToken?<Navigate to="/admin" replace/>:<AdminSignUp/>}/>
+        <Route path='/admin/signin' element={adminAuthToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>
+        <Route path='/admin/signup' element={adminAuthToken?<Navigate to="/admin" replace/>:<AdminSignUp/>}/>
       </Routes>
     </>
   );
