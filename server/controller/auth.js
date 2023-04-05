@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
     const payload = { "email": user.email }
     const accessToken = createAccessToken(payload);
 
-    res.cookie("_j1", accessToken, {
+    res.cookie("_uj1", accessToken, {
         maxAge:1000*10*24*60*60,
         withCredentials: true,
         secure: false,
@@ -55,7 +55,7 @@ const authenticateUser = async (req, res, next) => {
             const payload = { "email": foundUser.email }
 
                 const accessToken = createAccessToken(payload);
-                res.cookie("_j1", accessToken, {
+                res.cookie("_uj1", accessToken, {
                     withCredentials: true,
                     secure: false,
                     domain: "localhost",

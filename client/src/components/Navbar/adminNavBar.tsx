@@ -16,17 +16,11 @@ const AdminNavBar = () => {
         }
     }
 
-    // const logoutHandler=async()=>{
-    //     try{
-    //         const response=await axios.post("/logout")
-    //         if(response){
-    //             Cookies.remove("_j1");
-    //             navigate("/");
-    //         }
-    //     }catch(err){
-    //         console.log(err);
-    //     }
-    // }
+    const logoutHandler=async()=>{
+                Cookies.remove("_aj1");
+                navigate("/");
+        
+    }
 
     useEffect(()=>{
 
