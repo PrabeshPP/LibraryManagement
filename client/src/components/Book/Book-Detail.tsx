@@ -18,13 +18,13 @@ interface Book {
 const BookDetail = () => {
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate();
-  const authToken = Cookies.get("_j1");
+  const authToken = Cookies.get("_uj1");
   const params = useParams()
   const id = params.id
   const [book, setBook] = useState<Book>();
   const getSingleBook = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/books/${id}`, {
+      const response = await axios.get(`/books/${id}`, {
         withCredentials: true
       })
       if (response) {
@@ -45,7 +45,6 @@ const BookDetail = () => {
         })
         if (response) {
           setIsLoading(false)
-          console.log("SuccessFully Added To Cart!")
         }
       } catch (err) {
         console.log(err);

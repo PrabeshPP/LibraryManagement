@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AdminNavBar from '../Navbar/adminNavBar';
+import axios from 'axios';
 
 interface Book {
     id: string,
@@ -16,15 +17,16 @@ interface Book {
 const AdminDashBoard = () => {
     const [books,setBooks]=useState([]);
     const [bookCount, setBookCount] = useState(0);
+    const [userCount,setUserCount]=useState(0); 
     const [isAvailableCount, setIsAvailable] = useState(0);
     const [display, setDisplay] = useState(false)
     async function getData() {
-      const response = await fetch("http://localhost:3001/books", {
+      const response = await fetch("/books", {
         method: "GET"
       })
+
       const data = await response.json()
       if(data){
-        console.log(data.books);
         setBooks(data.books);
         setBookCount(data.books.length);
         let count = 0;
@@ -35,12 +37,15 @@ const AdminDashBoard = () => {
         }
         setIsAvailable(count);
       }
+
+      const response1=await axios.get("/get-all-users");
+      setUserCount(response1.data.users.length)
+      
     }  
     useEffect(()=>{
         getData()
     },[])
     useEffect(() => {
-        console.log(isAvailableCount)
     }, [isAvailableCount])
     function containerDisplayHandler() {
         setDisplay(!display);
@@ -63,7 +68,7 @@ const AdminDashBoard = () => {
             <div className='p-2 border-2  rounded-[20px] flex flex-col w-1/4 m-4 bg-white text-center h-40 justify-center'>
                 <i className="uil uil-books text-4xl"></i>
                 <span className = "text-lg font-bold">Registered Users</span>
-                <span className='text-lg'>{bookCount}</span>
+                <span className='text-lg'>{userCount}</span>
             </div>
         </div>
     )
