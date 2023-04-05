@@ -1,47 +1,48 @@
-import React,{ useState} from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router';
 import axios from 'axios';
 import loginImg from "../../Assets/login.png";
 import libraryImg from "../../Assets/library.svg";
 import { setAuthToken } from '../../utils/setHeaders';
 import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 const LoginComponent = () => {
-    const navigate=useNavigate();
-    const [showPassword,setShowPassword]=useState(false);
+    const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
 
-    const onShowPasswordClickListener=()=>{
-        setShowPassword((showPassword)=>!showPassword)
-    }   
+    const onShowPasswordClickListener = () => {
+        setShowPassword((showPassword) => !showPassword)
+    }
 
-    const onSubmitHandler=async(event:any)=>{
+    const onSubmitHandler = async (event: any) => {
         event.preventDefault();
-        const email=event.target.email.value;
-        const password=event.target.password.value;
-        const formData=new FormData();
-        formData.append("email",email);
-        formData.append("password",password);
-       
-        try{
-            const response=await axios.post("/login",formData,{
+        const email = event.target.email.value;
+        const password = event.target.password.value;
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("password", password);
+
+        try {
+            const response = await axios.post("/login", formData, {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                withCredentials:true
+                withCredentials: true
             })
-            if(response){
-                const authToken=Cookies.get("_j1");
+            if (response) {
+                const authToken = Cookies.get("_uj1");
                 setAuthToken(authToken)
-                navigate("/")   
+                navigate("/")
             }
-                 
-        }catch(err){
+
+        } catch (err) {
             console.log(err);
         }
     }
-  return (
-    <div className='h-[100vh] w-[100%] flex md:flex-row'>
+    return (
+        <div className='h-[100vh] w-[100%] flex md:flex-row'>
             <div className='h-[100%] w-[50%]'>
                 <img src={loginImg} alt={"Login Image"} className=" object-contain h-[100%] w-[100%]" />
             </div>
@@ -55,21 +56,31 @@ const LoginComponent = () => {
                         Hello! Welcome Back
                     </div>
                     <div className='h-[70%] w-[100%] rounded-bl-3xl'>
-                        <form onSubmit={(event)=>{
+                        <form onSubmit={(event) => {
                             onSubmitHandler(event)
                         }} className='h-[100%] w-[100%] flex flex-col items-center'>
                             <div className='w-[90%] flex flex-col'>
                                 <label className=' text-[#0c2340] font-bold'>Email:</label>
-                                <input name='email' type={"text"} placeholder="example@gmail.com" className=' h-[6vh] rounded-xl pl-2 mt-1'/>
+                                <input name='email' type={"text"} placeholder="example@gmail.com" className=' h-[6vh] rounded-xl pl-2 mt-1' />
                             </div>
                             <div className='w-[90%] flex flex-col mt-4'>
                                 <label className=' font-bold text-[#0c2340]'>Password:</label>
-                                <input name='password' type={showPassword?"text":"password"} placeholder="password" className='h-[6vh] rounded-xl pl-2 mt-1'/>
+                                <input name='password' type={showPassword ? "text" : "password"} placeholder="password" className='h-[6vh] rounded-xl pl-2 mt-1' />
                             </div>
                             <div className=' h-[10%] w-[80%] items-center flex flex-row'>
-                                <input className=' cursor-pointer h-[80%] flex justify-center items-center' onClick={onShowPasswordClickListener} type="checkbox"/>
+                                <input className=' cursor-pointer h-[80%] flex justify-center items-center' onClick={onShowPasswordClickListener} type="checkbox" />
                                 <p className='ml-2 h-[80%] text-sm mt-[-2px] text-[#0c2340] font-bold flex justify-center items-center'>Show Password</p>
                             </div>
+                            <p className="mt-8 text-xs font-light text-center text-gray-700">
+                                {" "}
+                                Don't have an account?{" "}
+                                <NavLink
+                                    to={"/user/signup"}
+                                    className="font-medium text-purple-600 hover:underline"
+                                >
+                                    Sign up
+                                </NavLink>
+                            </p>
                             <button className=' h-[7vh] w-[40%] text-white hover:bg-[#0c2340d2] text-md hover:shadow-md hover:shadow-black font-bold mt-5 bg-[#0c2340] rounded-xl' type='submit'>Login</button>
                         </form>
                     </div>
@@ -77,7 +88,7 @@ const LoginComponent = () => {
 
             </div>
         </div>
-  )
+    )
 }
 
 export default LoginComponent

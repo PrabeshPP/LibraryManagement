@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router';
 import axios from "axios";
 import classes from "./Book-Detail.module.css";
 import Cookies from 'js-cookie';
+import { NavLink } from 'react-router-dom';
 
 interface Book {
   id: string,
@@ -41,6 +42,9 @@ const BookDetail = () => {
       try {
         setIsLoading(true);
         const response = await axios.post("/add-to-cart", { "id": book?.id }, {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          },
           withCredentials: true
         })
         if (response) {
@@ -72,8 +76,9 @@ const BookDetail = () => {
               {
                 isLoading ? <div className='mt-5 text-[white] flex justify-center items-center text-mdfont-semibold bg-[teal] rounded-sm cursor-not-allowed h-[6vh] w-[40%]'>
                   <div className=' animate-spin h-[15px] w-[15px] rounded-full border-white border-t-[1px] border-r-[1px]'></div>
-                </div> :authToken? book.isAvailable ? <button onClick={onAddToCart} className='mt-5 text-[white] flex justify-center items-center text-mdfont-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[6vh] hover:shadow-lg hover:shadow-black w-[40%] hover:bg-[#3b10e5ce] hover:text-white'>Borrow Book</button> :
-                  <button className='mt-5 text-[white] flex justify-center items-center text-mdfont-semibold bg-[#a43434] rounded-sm cursor-not-allowed h-[6vh] w-[40%] disabled:opacity-20  hover:text-white'>Not Available</button>:<button className='mt-5 text-[white] flex justify-center items-center text-mdfont-semibold bg-[#a43434] rounded-sm cursor-not-allowed h-[6vh] w-[40%] disabled:opacity-20  hover:text-white'>Not Available</button>
+                </div> : authToken ? book.isAvailable ? <button onClick={onAddToCart} className='mt-5 text-[white] flex justify-center items-center text-mdfont-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[6vh] hover:shadow-lg hover:shadow-black w-[40%] hover:bg-[#3b10e5ce] hover:text-white'>Borrow Book</button> :
+                  <button className='mt-5 text-[white] flex justify-center items-center text-mdfont-semibold bg-[#a43434] rounded-sm cursor-not-allowed h-[6vh] w-[40%] disabled:opacity-20  hover:text-white'>Not Available</button> :
+                  <NavLink to="/user/signin" className='mt-5 text-[white] flex justify-center items-center bg-[#3a10e5] text-mdfont-semibold hover:bg-[#3b10e5ce] rounded-sm cursor-pointer h-[6vh] w-[40%] disabled:opacity-20  hover:text-white'>Add To Cart</NavLink>
               }
             </div>
           </div>

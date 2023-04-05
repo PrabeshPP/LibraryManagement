@@ -17,12 +17,17 @@ import AdminDashBoard from './components/Admin/admin';
 import AdminSignIn from './components/Admin/auth/signin';
 import AdminSignUp from './components/Admin/auth/signup';
 import CreateBook from './components/Admin/Book/Create-Book';
+import UserSignUp from './components/User/SignUp';
 
 
 function App() {
   const authToken = Cookies.get('_uj1');
   const adminAuthToken=Cookies.get('_aj1');
   const preferences = Cookies.get('preferences')
+
+  useEffect(()=>{
+
+  },[authToken])
 
   return (
     <>
@@ -34,7 +39,8 @@ function App() {
           <Route path='/home/books' element={<Books />} />
           <Route path='/home/borrowed-books' element={<CartPage />} />
         </Route>
-        <Route path='/signin' element={adminAuthToken ? <Navigate to="/home" replace /> : <LoginPage />} />
+        <Route path='/user/signin' element={authToken ? <Navigate to="/home" replace /> : <LoginPage />} />
+        <Route path='/user/signup' element={authToken ? <Navigate to="/home" replace /> : <UserSignUp />} />
         <Route path='/admin' element={<AdminPage/>}>
           <Route path='/admin' element={<AdminDashBoard/>} />
           <Route path='/admin/books' element={<AdminBookUI/>}/>

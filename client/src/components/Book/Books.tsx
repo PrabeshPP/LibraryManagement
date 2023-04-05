@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Card from '../../UI/Home/Book-UI';
+import axios from 'axios';
 
 interface Book {
   id: string,
@@ -12,12 +13,11 @@ interface Book {
 }
 
 const Books = () => {
+
   const [books,setBooks]=useState([]);
   async function getData() {
-    const response = await fetch("http://localhost:3001/books", {
-      method: "GET"
-    })
-    const data = await response.json()
+    const response = await axios.get("/books")
+    const data = response.data
     if(data){
       setBooks(data.books);
     }
