@@ -18,7 +18,7 @@ const CreateBook = () => {
     }
 
     const navigate = useNavigate()
-    const authToken = Cookies.get("_j1")
+    const authToken = Cookies.get("_aj1")
     const coverImageRef: any = useRef(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [coverImageFile, setCoverImageFile] = useState("");
@@ -114,7 +114,7 @@ const CreateBook = () => {
                     Add Book
                 </h1>
                 <ToastContainer pauseOnFocusLoss={false} closeButton={true} closeOnClick={true} draggable={false} pauseOnHover={false} autoClose={3000} limit={5} />
-                <form onSubmit={isLoading ? () => { } : onSubmitHandler} className="mt-6">
+                <form onSubmit={isLoading ? () => {return false } : onSubmitHandler} className="mt-6">
 
                     <div className="mb-2">
                         <label
@@ -193,7 +193,7 @@ const CreateBook = () => {
                         <AiFillCamera className='text-2xl ml-3' />
                         <input ref={coverImageRef} onChange={(event) => {
                             loadCoverImage(event)
-                        }} accept="image/png, image/jpeg, image/jpg" className=" hidden"
+                        }} accept="image/png, image/jpeg, image/jpg , image/webp" className=" hidden"
                             name="coverImage" type="file" />
                     </label>
                     <output className={coverImage ? "h-[30vh] w-[100%] flex flex-row items-center mt-5 justify-around" : "hidden"} id="coverImage">
@@ -212,9 +212,12 @@ const CreateBook = () => {
                     </output>
 
                     <div className="mt-6">
-                        <button type="submit" className={isLoading ? "w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-500 rounded-md  focus:outline-none  cursor-not-allowed" : "w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600"}>
+                        {
+                            isLoading?<div className='"w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-red-500 rounded-md  focus:outline-none  cursor-not-allowed"'> Adding....</div>:<button type="submit" className={"w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-[#3a10e5] rounded-md hover:hover:bg-[#3b10e5ce] focus:outline-none focus:bg-purple-600"}>
                             Add
                         </button>
+                        }
+                        
                     </div>
                 </form>
             </div>

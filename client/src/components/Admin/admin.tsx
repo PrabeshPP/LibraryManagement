@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import AdminNavBar from '../Navbar/adminNavBar';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 interface Book {
     id: string,
@@ -15,17 +16,21 @@ interface Book {
 
 
 const AdminDashBoard = () => {
+    const adminAuthCokkie=Cookies.get("_aj1")
     const [books,setBooks]=useState([]);
     const [bookCount, setBookCount] = useState(0);
     const [userCount,setUserCount]=useState(0); 
     const [isAvailableCount, setIsAvailable] = useState(0);
     const [display, setDisplay] = useState(false)
     async function getData() {
-      const response = await fetch("/books", {
-        method: "GET"
+      const response = await axios.get("/books",{
+        headers:{
+            Authorization:`Bearer ${adminAuthCokkie}`
+        },
+        withCredentials:true
       })
 
-      const data = await response.json()
+      const data = response.data
       if(data){
         setBooks(data.books);
         setBookCount(data.books.length);
@@ -38,7 +43,12 @@ const AdminDashBoard = () => {
         setIsAvailable(count);
       }
 
-      const response1=await axios.get("/get-all-users");
+      const response1=await axios.get("/get-all-users",{
+        headers:{
+            Authorization:`Bearer ${adminAuthCokkie}`
+        },
+        withCredentials:true
+      });
       setUserCount(response1.data.users.length)
       
     }  

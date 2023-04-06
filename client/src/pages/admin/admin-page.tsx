@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import AdminSignIn from "../../components/Admin/auth/signin";
 
 const AdminPage=()=>{
-    const authToken = Cookies.get('_j1');
+    const authToken = Cookies.get('_aj1');
     return(
         <>
         {

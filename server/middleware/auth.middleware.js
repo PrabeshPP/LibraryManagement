@@ -3,6 +3,7 @@ const { createAccessToken, createRefreshToken, verifyToken, verifyRefreshToken }
 
 const authMiddleware = async (req, res, next) => {
     const header = req.headers.authorization;
+    
     const token = header.split(" ")[1]
     if (token) {
         const result = verifyToken({ "token": token })
