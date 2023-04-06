@@ -31,7 +31,7 @@ const Books = () => {
       <div className=" min-h-[90vh] w-[100%] flex flex-wrap justify-around mt-6">
         {
           books.length === 0 ? <div>Loading......</div> : books.map((book:Book) => {
-            return <Card key={book.id} Book={book}/>
+            return <Card key={book.id} Book={book} admin = {false}/>
           })
         }
       </div>
