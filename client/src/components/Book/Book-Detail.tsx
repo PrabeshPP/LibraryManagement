@@ -61,7 +61,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     getSingleBook();
-  }, [onAddToCart])
+  }, [onAddToCart,authToken])
   return (
     <div className='h-[90vh] w-[100%]'>
       {

@@ -23,6 +23,7 @@ const NavBar = () => {
         try {
 
             Cookies.remove("_uj1");
+            Cookies.remove("preferences")
             navigate("/home");
 
         } catch (err) {
