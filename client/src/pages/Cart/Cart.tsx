@@ -5,8 +5,21 @@ import emptyBookImage from "../../Assets/empty-book.svg";
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 import classes from "./Cart.module.css";
+import { toast,ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CartPage = () => {
+
+  //Toast to notify the User
+  const notify=({error}:{error:boolean})=>{
+    if(error){
+      toast.error('Could not return the Item from the Cart')
+    }else{
+      toast.success("Sucessfully Returned the Book!")
+    }
+  }
+
+
   const authToken = Cookies.get('_uj1')
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -23,12 +36,13 @@ const CartPage = () => {
           }
         });
         if (response) {
+          notify({error:false})
           setIsLoadingRemove(false);
         } else {
-          console.log("Failed to Remove the Item")
+          notify({error:true})
         }
       } catch (err) {
-        console.log(err);
+        notify({error:true})
       }
     }
   }
@@ -57,6 +71,7 @@ const CartPage = () => {
 
   return (
     <>
+      <ToastContainer pauseOnFocusLoss={false} closeButton={true} closeOnClick={true} draggable={false} pauseOnHover={false} autoClose={3000} limit={5} />
       {authToken ? <div className=' min-h-[90vh] bg-[#fff0e5] pb-5 w-[100%] flex justify-center flex-col items-center'>
         {
           isLoading ? <div className=' h-[100px] w-[100px] rounded-full border-t-[4px] border-r-[4px] border-l-[4px]  border-[#3a10e5] animate-spin'></div> : data.length == 0 ? <div className=' h-[90vh] w-[100%] flex flex-col justify-center items-center'>

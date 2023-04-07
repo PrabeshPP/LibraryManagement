@@ -134,7 +134,8 @@ const getAllItemFromCart = async (req, res) => {
         }
     })
 
-    const currData = await Prisma.cartItem.findMany({
+    if(currCart){
+        const currData = await Prisma.cartItem.findMany({
         where: {
             cartId: currCart.id
         },
@@ -146,6 +147,12 @@ const getAllItemFromCart = async (req, res) => {
 
     res.status(200)
     res.json({ "message": currData })
+    }else{
+        res.status(200)
+        res.json({"message":[]})
+    }
+
+    
 }
 
 
