@@ -81,7 +81,11 @@ const createBook=async(req,res)=>{
 
 //Get all the books
 const getAllBooks=async(req,res)=>{
-    const list_of_books=await Prisma.book.findMany()
+    const list_of_books=await Prisma.book.findMany({
+        include:{
+            author:true
+        }
+    })
     res.status(200)
     res.json({"books":list_of_books})
 }
@@ -103,6 +107,9 @@ const getSingleBook=async(req,res)=>{
     const book=await Prisma.book.findUnique({
         where:{
             id:bookId
+        },
+        include:{
+            author:true
         }
     })
     res.status(200);
@@ -113,7 +120,7 @@ const getSingleBook=async(req,res)=>{
 //delete a specific book
 
 const deleteBook=async(req,res)=>{
-    const bookId=req.body.id;
+    const bookId=req.params.id;
     const result=await Prisma.book.delete({
         where:{
             id:bookId
@@ -127,4 +134,27 @@ const deleteBook=async(req,res)=>{
 //update the book
 /* To-do Task */
 
-module.exports={createBook,getAllBooks,getSingleBook}
+const updateBook=async(req,res)=>{
+    const bookId=req.params.id;
+    const bookTitle=req.body.bookName;
+    const bookIsbn=req.body.isbn;
+    const bookSummary=req.body.summary;
+
+
+    
+    const updatedBook=await Prisma.book.update({
+        where:{
+            id:bookId
+        },
+        data:{
+            bookName:bookTitle,
+            isbn:bookIsbn,
+            summary:bookSummary,
+        }
+    })
+
+    res.status(200)
+    res.json({"message":"Successfully Updated the Book"})
+}
+
+module.exports={createBook,getAllBooks,getSingleBook,updateBook,deleteBook}

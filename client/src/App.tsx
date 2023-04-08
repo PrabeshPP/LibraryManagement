@@ -18,6 +18,8 @@ import AdminSignIn from './components/Admin/auth/signin';
 import AdminSignUp from './components/Admin/auth/signup';
 import CreateBook from './components/Admin/Book/Create-Book';
 import UserSignUp from './components/User/SignUp';
+import UpdateBook from './components/Admin/Book/Update-Book';
+import NotFoundPage from './UI/404';
 
 
 function App() {
@@ -27,13 +29,13 @@ function App() {
 
   useEffect(()=>{
 
-  },[authToken])
+  },[authToken,adminAuthToken,preferences])
 
   
   return (
     <>
       <Routes>
-        <Route path='*' element={!preferences ? <MainPage /> : preferences === 'admin' ? <Navigate to="/admin" replace /> : <Navigate to="/home" replace />} />
+        <Route path='/' element={!preferences ? <MainPage /> : preferences === 'admin' ? <Navigate to="/admin" replace /> : <Navigate to="/home" replace />} />
         <Route path="/home" element={<UserInterface />}>
           <Route path='/home' element={<Home />} />
           <Route path="/home/books/:id" element={<BookDetail />} />
@@ -46,10 +48,12 @@ function App() {
           <Route path='/admin' element={<AdminDashBoard/>} />
           <Route path='/admin/books' element={<AdminBookUI/>}/>
           <Route path = '/admin/books/create' element = {<CreateBook/>} />
+          <Route path="/admin/book/update/:id" element={<UpdateBook/>}/>
           <Route path='/admin/users' element={<AdminUserUI/>}/>
         </Route>
         <Route path='/admin/signin' element={adminAuthToken?<Navigate to="/admin" replace/>:<AdminSignIn/>}/>
         <Route path='/admin/signup' element={adminAuthToken?<Navigate to="/admin" replace/>:<AdminSignUp/>}/>
+        <Route path='*' element={<NotFoundPage/>}/>
       </Routes>
     </>
   );

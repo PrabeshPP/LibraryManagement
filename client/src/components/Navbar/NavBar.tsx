@@ -24,6 +24,7 @@ const NavBar = () => {
 
             Cookies.remove("_uj1");
             Cookies.remove("preferences")
+            window.location.reload()
             navigate("/home");
 
         } catch (err) {

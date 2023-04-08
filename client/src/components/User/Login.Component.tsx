@@ -34,7 +34,7 @@ const LoginComponent = () => {
             if (response) {
                 const authToken = Cookies.get("_uj1");
                 setAuthToken(authToken)
-                navigate("/")
+                navigate("/home")
             }
 
         } catch (err) {

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import AdminNavBar from '../Navbar/adminNavBar';
+import AdminNavBar from '../Navbar/admin/adminNavBar';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
