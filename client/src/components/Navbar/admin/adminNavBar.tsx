@@ -31,7 +31,7 @@ const AdminNavBar = () => {
     // //To do add on-scrollable
     // // const [isScrolled,setScrolled]=useState(false)
     return (
-        <div className={'font-sans h-[100vh] w-[20%] bg-[#14213D] flex-col justify-between sticky top-0 z-50 transition-all'}>
+        <div className={'font-sans h-[100vh] w-[20%] bg-[#14213D] flex-col justify-between sticky top-0 z-50 transition-all select-none'}>
             <NavLink to={"/"} className='h-[20%] w-[100%] flex flex-col  items-center cursor-pointer'>
                 <div className='h-[100%] w-[100%] text-left justify-center flex flex-col items-center border-b-2 border-white'>
                     <ImLibrary className='text-[white] text-2xl' />

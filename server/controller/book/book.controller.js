@@ -81,7 +81,11 @@ const createBook=async(req,res)=>{
 
 //Get all the books
 const getAllBooks=async(req,res)=>{
-    const list_of_books=await Prisma.book.findMany()
+    const list_of_books=await Prisma.book.findMany({
+        include:{
+            author:true
+        }
+    })
     res.status(200)
     res.json({"books":list_of_books})
 }
@@ -103,6 +107,9 @@ const getSingleBook=async(req,res)=>{
     const book=await Prisma.book.findUnique({
         where:{
             id:bookId
+        },
+        include:{
+            author:true
         }
     })
     res.status(200);

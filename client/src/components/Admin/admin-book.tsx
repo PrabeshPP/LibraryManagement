@@ -1,15 +1,48 @@
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
+import { useState, useEffect } from "react";
+import axios from "axios";
+import Card from "../../UI/Home/Book-UI";
+import AdminSingleBookUI from "../../UI/Admin/Book-admin-UI";
+
+interface Book {
+    id: string,
+    bookName: string,
+    isbn: string,
+    summary: string,
+    userId: string,
+    auhtorId: string,
+    coverImage: string
+}
 
 const AdminBookUI = () => {
-    return <div className=" h-[90vh] w-[100%] flex justify-center items-center">
-        <div className=" h-[80%] w-[60%] flex flex-wrap justify-center items-center flex-row">
-            <div className=" hover:bg-[#e5e5e5] h-[40%] w-[40%] m-2 flex justify-center items-center bg-[white] text-lg font-bold cursor-pointer p-2 border-2 rounded-[20px]">All Books</div>
-            <div className=" hover:bg-[#e5e5e5] h-[40%] w-[40%] m-2 flex justify-center items-center bg-[white] text-lg font-bold cursor-pointer p-2 border-2 rounded-[20px]">Update Book</div>
-            <div className=" hover:bg-[#e5e5e5] h-[40%] w-[40%] m-2 flex justify-center items-center bg-[white] text-lg font-bold cursor-pointer p-2 border-2 rounded-[20px]">Delete Book</div>
-            <Link to = {"/admin/books/create"} className="hover:bg-[#e5e5e5] h-[40%] w-[40%] m-2 flex justify-center items-center bg-[white] text-lg font-bold cursor-pointer p-2 border-2 rounded-[20px]">
-            Create Book
-            </Link>
+    const [books, setBooks] = useState([]);
+    async function getData() {
+        const response = await axios.get("/books")
+        const data = response.data
+        if (data) {
+            setBooks(data.books);
+        }
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
+    return <div className="min-h-[100vh] w-[80%] ">
+        {/* <div className=" h-[10vh] w-[80%] sticky top-[2%] justify-around flex items-center  ml-[10%] backdrop-filter backdrop-blur-sm bg-opacity-40 bg-gray-500 rounded-xl">
+            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">All Books</div>
+            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">Add Book</div>
+            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">Update Book</div>
+            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">Delete Book</div>
+        </div> */}
+        <div className="min-h-[100vh] w-[100%] flex flex-col items-center pb-[5%]">
+            {books.length === 0 ? <div>Loading......</div> : books.map((book: Book) => {
+                return <AdminSingleBookUI key={book.id} Book={book} admin={false} />
+            })
+            }
         </div>
+
+
     </div>
 }
 

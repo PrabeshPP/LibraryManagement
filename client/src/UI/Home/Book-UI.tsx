@@ -1,4 +1,3 @@
-import React from 'react'
 import {NavLink} from "react-router-dom"
 import classes from "./Book-UI.module.css";
 import { confirmAlert } from 'react-confirm-alert'; // Import library
