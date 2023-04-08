@@ -27,13 +27,13 @@ function App() {
 
   useEffect(()=>{
 
-  },[authToken])
+  },[authToken,adminAuthToken,preferences])
 
   
   return (
     <>
       <Routes>
-        <Route path='*' element={!preferences ? <MainPage /> : preferences === 'admin' ? <Navigate to="/admin" replace /> : <Navigate to="/home" replace />} />
+        <Route path='/' element={!preferences ? <MainPage /> : preferences === 'admin' ? <Navigate to="/admin" replace /> : <Navigate to="/home" replace />} />
         <Route path="/home" element={<UserInterface />}>
           <Route path='/home' element={<Home />} />
           <Route path="/home/books/:id" element={<BookDetail />} />
