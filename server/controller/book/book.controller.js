@@ -120,7 +120,7 @@ const getSingleBook=async(req,res)=>{
 //delete a specific book
 
 const deleteBook=async(req,res)=>{
-    const bookId=req.body.id;
+    const bookId=req.params.id;
     const result=await Prisma.book.delete({
         where:{
             id:bookId
@@ -134,4 +134,27 @@ const deleteBook=async(req,res)=>{
 //update the book
 /* To-do Task */
 
-module.exports={createBook,getAllBooks,getSingleBook}
+const updateBook=async(req,res)=>{
+    const bookId=req.params.id;
+    const bookTitle=req.body.bookName;
+    const bookIsbn=req.body.isbn;
+    const bookSummary=req.body.summary;
+
+
+    
+    const updatedBook=await Prisma.book.update({
+        where:{
+            id:bookId
+        },
+        data:{
+            bookName:bookTitle,
+            isbn:bookIsbn,
+            summary:bookSummary,
+        }
+    })
+
+    res.status(200)
+    res.json({"message":"Successfully Updated the Book"})
+}
+
+module.exports={createBook,getAllBooks,getSingleBook,updateBook,deleteBook}

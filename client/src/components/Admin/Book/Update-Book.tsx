@@ -46,8 +46,8 @@ const UpdateBook = () => {
   //checking wheather the required field are inputted correctly or not
   const [BookTitle, setBookTitle] = useState<string>("")
   const [Isbn, setIsbn] = useState<string>("")
-  const [AuthorFirstName, setFirstName] = useState<string>("")
-  const [AuthorLastName, setLastName] = useState<string>("")
+  // const [AuthorFirstName, setFirstName] = useState<string>("")
+  // const [AuthorLastName, setLastName] = useState<string>("")
   const [Summary, setSummary] = useState<string>("")
 
 
@@ -61,12 +61,12 @@ const UpdateBook = () => {
 
     const bookTitle = event.target.bookTitle.value;
     const bookIsbn = event.target.isbn.value;
-    const authorFirstName = event.target.firstName.value;
-    const authorLastName = event.target.lastName.value;
+    // const authorFirstName = event.target.firstName.value;
+    // const authorLastName = event.target.lastName.value;
     const bookSummary = event.target.summary.value;
 
 
-    if ((!bookTitle || !bookIsbn) || (!authorFirstName || !authorLastName) || !bookSummary) {
+    if ((!bookTitle || !bookIsbn) || !bookSummary) {
 
       notify({ error: true, message: "All the fields are required" })
 
@@ -77,10 +77,11 @@ const UpdateBook = () => {
       formData.append("bookName", bookTitle)
       formData.append("summary", bookSummary)
       formData.append("isbn", bookIsbn)
-      formData.append("authorFirstName", authorFirstName)
-      formData.append("authorLastName", authorLastName)
-      const response = await axios.post(`/update/book/:bookId`, formData, {
+      // formData.append("authorFirstName", authorFirstName)
+      // formData.append("authorLastName", authorLastName)
+      const response = await axios.post(`/update/book/${book?.id}`, formData, {
         headers: {
+          "Content-Type":"application/json",
           Authorization: `Bearer ${authToken}`
         },
         withCredentials: true
@@ -107,8 +108,8 @@ const UpdateBook = () => {
         setBook(response.data['data']);
         setBookTitle(response.data['data'].bookName)
         setIsbn(response.data['data'].isbn)
-        setFirstName(response.data['data'].author.firstName)
-        setLastName(response.data['data'].author.lastName)
+        // setFirstName(response.data['data'].author.firstName)
+        // setLastName(response.data['data'].author.lastName)
         setSummary(response.data['data'].summary)
       }
     } catch (err) {
@@ -158,8 +159,8 @@ const UpdateBook = () => {
                 className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
               />
             </div>
-            <div className=" h-[12vh] w-[100%] flex flex-row justify-between">
-              <div className="h-[90%] w-[40%]">
+            {/* <div className=" h-[12vh] w-[100%] flex flex-row justify-between"> */}
+              {/* <div className="h-[90%] w-[40%]">
                 <label
                   className="block text-sm font-semibold text-gray-800"
                 >Author FirstName
@@ -174,7 +175,7 @@ const UpdateBook = () => {
 
               {/* Author First Name and Last Name */}
 
-              <div className="h-[90%] w-[40%]">
+              {/* <div className="h-[90%] w-[40%]">
                 <label
                   className="block text-sm font-semibold text-gray-800"
                 >
@@ -188,9 +189,9 @@ const UpdateBook = () => {
                   type="text"
                   className="block w-full px-4 py-2 mt-2 text-purple-700 bg-white border rounded-md focus:border-purple-400 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
-              </div>
+              </div> */} 
 
-            </div>
+            {/* </div> */}
 
             <div className="mb-2">
               <label
