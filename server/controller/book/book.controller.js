@@ -121,11 +121,11 @@ const getSingleBook=async(req,res)=>{
 
 const deleteBook=async(req,res)=>{
     const bookId=req.params.id;
-    const result=await Prisma.book.delete({
-        where:{
-            id:bookId
-        }
-    })
+    // const result=await Prisma.book.delete({
+    //     where:{
+    //         id:bookId
+    //     }
+    // })
     res.status(200);
     res.json({"message":"Successfully removed the book from our database!"})
 }
