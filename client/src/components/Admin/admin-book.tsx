@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "../../UI/Home/Book-UI";
 import AdminSingleBookUI from "../../UI/Admin/Book-admin-UI";
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
 
 interface Book {
     id: string,
@@ -15,6 +17,15 @@ interface Book {
 }
 
 const AdminBookUI = () => {
+
+    const notify = async ({ error, message }: { error: boolean, message: string }) => {
+        if (error) {
+            toast.error(message)
+        } else {
+            toast.success(message)
+        }
+    }
+
     const [books, setBooks] = useState([]);
     async function getData() {
         const response = await axios.get("/books")
@@ -24,20 +35,24 @@ const AdminBookUI = () => {
         }
     }
 
+    function updateComponent(success:boolean){
+        if(success){
+            notify({ error: success, message: "Successfully removed the book!"})
+        }else{
+            notify({ error: success, message: "Cannot remove the book!"})
+        }
+        
+    }
+
     useEffect(() => {
         getData()
-    }, [])
+    }, [updateComponent])
 
     return <div className="min-h-[100vh] w-[80%] ">
-        {/* <div className=" h-[10vh] w-[80%] sticky top-[2%] justify-around flex items-center  ml-[10%] backdrop-filter backdrop-blur-sm bg-opacity-40 bg-gray-500 rounded-xl">
-            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">All Books</div>
-            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">Add Book</div>
-            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">Update Book</div>
-            <div className=" h-[70%] w-[20%] border-[2px] border-[#333333] text-[#333333] font-bold   cursor-pointer rounded-2xl flex justify-center items-center">Delete Book</div>
-        </div> */}
+        <ToastContainer pauseOnFocusLoss={false} closeButton={true} closeOnClick={true} draggable={false} pauseOnHover={false} autoClose={3000} limit={5} />
         <div className="min-h-[100vh] w-[100%] flex flex-col items-center pb-[5%]">
             {books.length === 0 ? <div>Loading......</div> : books.map((book: Book) => {
-                return <AdminSingleBookUI key={book.id} Book={book} admin={false} />
+                return <AdminSingleBookUI onUpdate={updateComponent} key={book.id} Book={book} admin={false} />
             })
             }
         </div>
