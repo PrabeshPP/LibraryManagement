@@ -108,7 +108,7 @@ const CreateBook = () => {
 
 
     return (
-        <div className='flex-col flex justify-center items-center min-h-[90vh] w-[100%] pb-10 pt-10'>
+        <div className='flex-col flex justify-center items-center min-h-[100vh] w-[80%] pb-10 pt-10'>
             <div className='w-full p-6  bg-[white] rounded-md shadow-2xl lg:max-w-xl'>
                 <h1 className="text-3xl font-semibold font-serif text-center text-black ">
                     Add Book

@@ -48,9 +48,10 @@ const AdminNavBar = () => {
                 </NavLink>
                 <NavLink to={"/admin/books"} className='text-[white] '>
                     {/* <IoBookSharp/> */}
-                    <p className=' ml-1 hover:text-[#4A6581] font-bold cursor-pointer'>Books</p>
-                    <div>
-                        <div>Create-Book</div>
+                    <p className='group ml-1 hover:text-[#4A6581] font-bold cursor-pointer'>Books</p>
+                    <div className="group-hover:bg-red-200">
+                        <div>All Books</div>
+                        <NavLink to={"/admin/books/create"}>Create-Book</NavLink>
                     </div>
                 </NavLink>
                 <div onClick={logoutHandler} className='text-[white] flex justify-center items-center text-lg font-semibold bg-[#3a10e5] rounded-sm cursor-pointer h-[10%] w-[80%] hover:bg-[#4b3b8ece] hover:text-white'>
