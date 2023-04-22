@@ -61,7 +61,7 @@ const AdminDashBoard = () => {
         setDisplay(!display);
     }
     return (
-        <div className = "bg-[#fff0e5] h-screen">
+        <div className = "bg-[#fff0e5] h-[100vh] w-[80%]">
             <h1 className='text-xl text-center uppercase mt-4 font-bold'>Admin Dashboard</h1>
             <br />
             <div  className=' cursor-pointer p-2 border-2 rounded-[20px] flex flex-col w-1/4 m-4 bg-white text-center h-40 justify-center relative' onClick={containerDisplayHandler} >
