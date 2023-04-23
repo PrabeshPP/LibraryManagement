@@ -1,13 +1,23 @@
 const Prisma = require("../../utils/prisma");
 const Prsima=require("../../utils/prisma");
+const cloudinary=require("cloudinary").v2;
+
+cloudinary.config({
+    cloud_name:process.env.CLOUD_NAME,
+    api_key:process.env.API_KEY,
+    api_secret:process.env.API_SECRET
+});
 
 const createBook=async(req,res)=>{
     const bookName=req.body.bookName;
     const isbn=req.body.isbn;
     const summary=req.body.summary
     const coverImage=req.cloudinaryUrl;
+    const coverImagePublicId=req.publicId
     const authorFirstName=req.body.authorFirstName;
     const authorLastName=req.body.authorLastName;
+
+   
 
     // console.log(bookName)
     // console.log(isbn)
@@ -32,6 +42,7 @@ const createBook=async(req,res)=>{
                 isbn:isbn,
                 summary:summary,
                 coverImage:coverImage,
+                coverImagePublicId:coverImagePublicId,
                 author:{
                     connect:{
                         id:atuhorExist.id
@@ -56,6 +67,7 @@ const createBook=async(req,res)=>{
 
         const createdBook=await Prisma.book.create({
             data:{
+                coverImagePublicId:coverImagePublicId,
                 bookName:bookName,
                 isbn:isbn,
                 summary:summary,
@@ -126,6 +138,27 @@ const deleteBook=async(req,res)=>{
             id:bookId
         }
     })
+    const authorId=result.authorId;
+    const author=await Prisma.author.findUnique({
+        where:{
+            id:authorId
+        },
+        include:{
+            Book:true
+        }
+    })
+
+    if(author.Book.length===0){
+        const deletedAuthor=await Prisma.author.delete({
+            where:{
+                id:authorId
+            }
+        })
+    }
+    //This will dynamically delete the image in the cloud 
+    cloudinary.uploader.destroy(result.coverImagePublicId,function(result){
+    })
+
     res.status(200);
     res.json({"message":"Successfully removed the book from our database!"})
 }
