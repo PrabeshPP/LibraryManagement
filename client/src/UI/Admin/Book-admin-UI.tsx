@@ -90,8 +90,8 @@ const AdminSingleBookUI = (props: any): JSX.Element => {
                     <p className=" text-[#10162f] flex  text-start text-md font-bold">By: {book.author.firstName} {book.author.lastName}</p>
                 </div>
                 <div className=" h-[90%] w-[35%] ml-2 flex flex-col justify-around">
-                    <NavLink to={`/admin/book/update/${book.id}`} className=" rounded-2xl cursor-pointer h-[35%] w-[80%] font-semibold hover:shadow-xl hover:bg-[#FFA500] bg-[#6F42C1] text-white flex justify-center items-center">Update</NavLink>
-                    <div onClick={book.isAvailable?onDeleteHandler:onNotAvailableHandler} className={book.isAvailable?" rounded-2xl cursor-pointer hover:shadow-xl font-semibold hover:bg-[#dc3546c4] h-[35%] w-[80%] bg-[#DC3545] text-white flex justify-center items-center":" rounded-2xl hover:shadow-xl font-semibold hover:bg-[#dc3546c4] h-[35%] w-[80%] bg-[green] cursor-not-allowed text-white flex justify-center items-center"}>Delete</div>
+                    <NavLink to={`/admin/book/update/${book.id}`} className=" rounded-sm cursor-pointer h-[35%] w-[80%] font-semibold hover:shadow-xl hover:bg-[#FFA500] bg-[#6F42C1] text-white flex justify-center items-center">Update</NavLink>
+                    <div onClick={book.isAvailable?onDeleteHandler:onNotAvailableHandler} className={book.isAvailable?" rounded-sm cursor-pointer hover:shadow-xl font-semibold hover:bg-[#dc3546c4] h-[35%] w-[80%] bg-[#DC3545] text-white flex justify-center items-center":" rounded-sm hover:shadow-xl font-semibold hover:bg-[#dc3546c4] h-[35%] w-[80%] bg-[green] cursor-not-allowed text-white flex justify-center items-center"}>Delete</div>
                 </div>
             </div>
         </>

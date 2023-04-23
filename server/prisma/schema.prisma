@@ -53,6 +53,7 @@ model Book{
   isAvailable Boolean @default(true)
   author Author @relation(fields: [authorId],references: [id])
   cartItem CartItem?
+  coverImagePublicId String
 }
 
 
