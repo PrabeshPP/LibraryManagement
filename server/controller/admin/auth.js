@@ -63,11 +63,11 @@ const authenticateAdmin=async (req, res, next) => {
                 res.json({ "message": "Successfully Logged In!" });
         }else{
             res.status(401);
-            res.json({"message":"Not Authorized!"})
+            res.json({"message":"Password did not match"})
         }
     }else{
         res.status(401);
-        res.json({"message":"Not Authorized!"})
+        res.json({"message":"Email not found"})
     }
 }
 
